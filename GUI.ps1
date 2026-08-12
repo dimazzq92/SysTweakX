@@ -541,7 +541,7 @@ $btnOpt.Add_Click({
     $argsString = ($selected | ForEach-Object { $_.Tag }) -join " "
 	$global:IsApplying = $true
 	$window.Hide()
-	$proc = Start-Process cmd.exe -ArgumentList "/c call `"$batPath`" $argsString" -PassThru
+	$proc = Start-Process cmd.exe -ArgumentList "/c call `"$batPath`" $argsString" -Verb RunAs -PassThru
 })
 
 $mainBorder.Child = $root
@@ -558,5 +558,6 @@ if ($ShowReboot) {
 if (-not $global:IsApplying) {
     Start-Process "cmd.exe" -ArgumentList "/c timeout /t 2 >nul & rmdir /s /q `"$PSScriptRoot`"" -WindowStyle Hidden
 }
+
 
 
