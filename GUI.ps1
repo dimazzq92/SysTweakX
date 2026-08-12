@@ -1,5 +1,6 @@
 ﻿param(
-    [switch]$ShowReboot
+    [switch]$ShowReboot,
+    [string]$Lang
 )
 
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
@@ -17,11 +18,247 @@ if (-not (Test-Path $registryPath)) {
 foreach ($name in $keys.Keys) {
     Set-ItemProperty -Path $registryPath -Name $name -Value $keys[$name] -Type String -Force
 }
-# ================= ПУТИ =================
+# ================= РџРЈРўР =================
 $batPath = Join-Path $PSScriptRoot "SysTweakX.bat"
 $workDir = Join-Path $PSScriptRoot "Work"
 
-# ================= ФУНКЦИИ =================
+# ================= LOCALIZATION =================
+if ([string]::IsNullOrEmpty($Lang)) {
+    $global:Lang = if ((Get-UICulture).TwoLetterISOLanguageName -eq "ru") { "RU" } else { "EN" }
+} else {
+    $global:Lang = $Lang
+}
+
+$loc = @{
+    "RU" = @{
+        "RebootTitle" = "РќР°СЃС‚СЂРѕР№РєР° Р·Р°РІРµСЂС€РµРЅР°!`n`nРџРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ РџРљ?"
+        "Yes" = "Р”Рђ"
+        "No" = "РќР•Рў"
+        "Optimize" = "РћРџРўРРњРР—РР РћР’РђРўР¬"
+        "LangToggle" = "EN"
+        
+        "Sec_Cleanup" = "РћС‡РёСЃС‚РєР°"
+        "Twk_Updates" = "РЈРґР°Р»РёС‚СЊ С„Р°Р№Р»С‹ РѕР±РЅРѕРІР»РµРЅРёР№"
+        "Twk_StoreCache" = "РЈРґР°Р»РёС‚СЊ РєСЌС€ Windows Store"
+        "Twk_ExplorerCache" = "РЈРґР°Р»РёС‚СЊ РєСЌС€ РџСЂРѕРІРѕРґРЅРёРєР°"
+        "Twk_WinSxS" = "РћС‡РёСЃС‚РёС‚СЊ С…СЂР°РЅРёР»РёС‰Рµ WinSxS"
+        "Twk_JunkFolders" = "РЈРґР°Р»РёС‚СЊ Р»РёС€РЅРёРµ РїР°РїРєРё РЅР° РґРёСЃРєРµ C:"
+        "Twk_OldDrivers" = "РЈРґР°Р»РёС‚СЊ СЃС‚Р°СЂС‹Рµ РґСЂР°Р№РІРµСЂР°"
+        "Twk_ShellBags" = "РЈРґР°Р»РёС‚СЊ ShellBags"
+        
+        "Sec_Preinstalled" = "РџСЂРµРґСѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ РїСЂРёР»РѕР¶РµРЅРёСЏ"
+        "Twk_UWP" = "РЈРґР°Р»РёС‚СЊ РІСЃРµ UWP-РїСЂРёР»РѕР¶РµРЅРёСЏ"
+        "Twk_OneDrive" = "РЈРґР°Р»РёС‚СЊ OneDrive"
+        "Twk_RemoteAssist" = "РЈРґР°Р»РёС‚СЊ РџРѕРјРѕС‰РЅРёРєР° РїРѕ СѓРґР°Р»РµРЅРЅРѕРјСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЋ"
+        "Twk_StartMenu" = "РЈРґР°Р»РёС‚СЊ Р»РёС€РЅРёРµ РїР°РїРєРё РїСЂРёР»РѕР¶РµРЅРёР№ РІ РџСѓСЃРєРµ"
+        
+        "Sec_Edge" = "Р‘СЂР°СѓР·РµСЂ Edge Рё WebView2"
+        "Twk_Edge" = "РЈРґР°Р»РёС‚СЊ Microsoft Edge"
+        "Twk_WebView" = "РЈРґР°Р»РёС‚СЊ Edge WebView2"
+        
+        "Sec_Defender" = "Р—Р°С‰РёС‚РЅРёРє Windows"
+        "Twk_Defender" = "РЈРґР°Р»РёС‚СЊ Р—Р°С‰РёС‚РЅРёРє Windows (DefenderKiller)"
+        
+        "Sec_Components" = "РљРѕРјРїРѕРЅРµРЅС‚С‹ Windows"
+        "Twk_Components" = "РЈРґР°Р»РёС‚СЊ РІСЃРµ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹"
+        
+        "Sec_Tasks" = "РџР»Р°РЅРёСЂРѕРІС‰РёРє Р·Р°РґР°С‡"
+        "Twk_Tasks" = "РћС‚РєР»СЋС‡РёС‚СЊ Р·Р°РґР°С‡Рё С‚РµР»РµРјРµС‚СЂРёРё Рё РїСЂРѕРІРµСЂРѕРє"
+        
+        "Sec_OptParams" = "РћРїС‚РёРјРёР·Р°С†РёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ"
+        "Twk_Hibernate" = "РћС‚РєР»СЋС‡РёС‚СЊ Р“РёР±РµСЂРЅР°С†РёСЋ"
+        "Twk_ResStorage" = "РћС‚РєР»СЋС‡РёС‚СЊ Р—Р°СЂРµР·РµСЂРІРёСЂРѕРІР°РЅРЅРѕРµ С…СЂР°РЅРёР»РёС‰Рµ"
+        "Twk_RestorePts" = "РћС‚РєР»СЋС‡РёС‚СЊ РўРѕС‡РєРё РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ"
+        "Twk_DelayedSvc" = "РћС‚Р»РѕР¶РµРЅРЅС‹Р№ Р·Р°РїСѓСЃРє Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёС… СЃР»СѓР¶Р±"
+        "Twk_SysLog" = "РњРёРЅРёРјРёР·РёСЂРѕРІР°С‚СЊ СЃРёСЃС‚РµРјРЅС‹Рµ РѕС‚С‡РµС‚С‹"
+        "Twk_BoostIcon" = "РЈРІРµР»РёС‡РёС‚СЊ РєСЌС€ РёРєРѕРЅРѕРє"
+        "Twk_SvcSplit" = "РЈРІРµР»РёС‡РёС‚СЊ РїРѕСЂРѕРі СЂР°Р·РґРµР»РµРЅРёСЏ SVC"
+        "Twk_FastFolder" = "РЈСЃРєРѕСЂРёС‚СЊ РѕС‚РєСЂС‹С‚РёРµ РїР°РїРѕРє"
+        "Twk_DisableVBS" = "РћС‚РєР»СЋС‡РёС‚СЊ VBS Рё HVCI"
+        "Twk_GameDVR" = "РћС‚РєР»СЋС‡РёС‚СЊ GameDVR"
+        "Twk_UltPerf" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ СЃС…РµРјСѓ РїРёС‚Р°РЅРёСЏ РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚СЊ"
+        "Twk_Resume" = "РћС‚РєР»СЋС‡РёС‚СЊ С„СѓРЅРєС†РёСЋ Р’РѕР·РѕР±РЅРѕРІРёС‚СЊ"
+        
+        "Sec_WinUpdate" = "Р¦РµРЅС‚СЂ РѕР±РЅРѕРІР»РµРЅРёСЏ Windows"
+        "Twk_WUDrivers" = "Р—Р°РїСЂРµС‚РёС‚СЊ СѓСЃС‚Р°РЅРѕРІРєСѓ РґСЂР°Р№РІРµСЂРѕРІ РёР· Р¦Рћ"
+        "Twk_DefUpdates" = "Р—Р°РїСЂРµС‚РёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёСЏ СѓРґР°Р»РµРЅРёСЏ РІСЂРµРґРѕРЅРѕСЃРЅС‹С… РїСЂРѕРіСЂР°РјРј"
+        "Twk_PauseUpd" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РїР°СѓР·Сѓ РѕР±РЅРѕРІР»РµРЅРёР№ РґРѕ 07.07.2077"
+        "Twk_NoAutoUpd" = "Р—Р°РїСЂРµС‚РёС‚СЊ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёРµ РѕР±РЅРѕРІР»РµРЅРёСЏ"
+        
+        "Sec_Useful" = "РџРѕР»РµР·РЅС‹Рµ С‚РІРёРєРё"
+        "Twk_UAC" = "РћС‚РєР»СЋС‡РёС‚СЊ UAC"
+        "Twk_Admin" = "РЎРґРµР»Р°С‚СЊ СѓС‡РµС‚РЅСѓСЋ Р·Р°РїРёСЃСЊ РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРѕР№"
+        "Twk_Region" = "РЎРЅСЏС‚СЊ СЂРµРіРёРѕРЅР°Р»СЊРЅС‹Рµ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ"
+        "Twk_KillFreeze" = "РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°РІРµСЂС€Р°С‚СЊ РїСЂРѕРіСЂР°РјРјС‹ РїСЂРё Р·Р°РІРёСЃР°РЅРёРё"
+        "Twk_Remote" = "РћС‚РєР»СЋС‡РёС‚СЊ РЈРґР°Р»РµРЅРЅС‹Р№ РїРѕРјРѕС‰РЅРёРє"
+        "Twk_Sticky" = "РћС‚РєР»СЋС‡РёС‚СЊ Р·Р°Р»РёРїР°РЅРёРµ РєР»Р°РІРёС€"
+        "Twk_TTL" = "РЎРєСЂС‹С‚СЊ СЂРµР°Р»СЊРЅС‹Р№ TTL"
+        "Twk_Notif" = "РћС‚РєР»СЋС‡РёС‚СЊ Р»РёС€РЅРёРµ СѓРІРµРґРѕРјР»РµРЅРёСЏ Рё СЂРµРєРѕРјРµРЅРґР°С†РёРё"
+        "Twk_DNS" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ DNS Cloudflare РЅР° Wi-Fi Р°РґР°РїС‚РµСЂС‹"
+        "Twk_Hosts" = "Р‘Р»РѕРєРёСЂРѕРІРєР° С‚РµР»РµРјРµС‚СЂРёРё (hosts)"
+        
+        "Sec_Drivers" = "Р”СЂР°Р№РІРµСЂС‹"
+        "Twk_InstallDrv" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РґСЂР°Р№РІРµСЂС‹ (РџР°РїРєР° Drivers РЅР° Р Р°Р±РѕС‡РµРј СЃС‚РѕР»Рµ)"
+        
+        "Sec_Other" = "Р”СЂСѓРіРёРµ РєРѕРјРїРѕРЅРµРЅС‚С‹"
+        "Twk_VC" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Visual C++"
+        "Twk_DX" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ DirectX 9-11"
+        
+        "Sec_Visual" = "Р’РёР·СѓР°Р»СЊРЅС‹Рµ С‚РІРёРєРё"
+        "Twk_Home" = "РЈРґР°Р»РёС‚СЊ РїСѓРЅРєС‚ Р“Р»Р°РІРЅР°СЏ РІ РџСЂРѕРІРѕРґРЅРёРєРµ"
+        "Twk_Gallery" = "РЈРґР°Р»РёС‚СЊ РїСѓРЅРєС‚ Р“Р°Р»РµСЂРµСЏ РІ РџСЂРѕРІРѕРґРЅРёРєРµ"
+        "Twk_Network" = "РЈРґР°Р»РёС‚СЊ РїСѓРЅРєС‚ РЎРµС‚СЊ РІ РџСЂРѕРІРѕРґРЅРёРєРµ"
+        "Twk_DarkTheme" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ С‚РµРјРЅСѓСЋ С‚РµРјСѓ СЃРёСЃС‚РµРјС‹"
+        "Twk_Wall" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РєР°СЃС‚РѕРјРЅС‹Рµ РѕР±РѕРё"
+        "Twk_BlueIcon" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРёРЅРёРµ РїР°РїРєРё"
+        "Twk_Icaros" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЌСЃРєРёР·С‹ РјРµРґРёР°С„Р°Р№Р»РѕРІ (Icaros)"
+        "Twk_TraySec" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРµРєСѓРЅРґС‹ РІ С‚СЂРµРµ"
+        "Twk_TrayDate" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РґР°С‚Сѓ РІ С‚СЂРµРµ"
+        "Twk_EndTask" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РїСѓРЅРєС‚ Р—Р°РІРµСЂС€РёС‚СЊ Р·Р°РґР°С‡Сѓ РЅР° РџР°РЅРµР»Рё Р·Р°РґР°С‡"
+        "Twk_RmTaskIcon" = "РЈРґР°Р»РёС‚СЊ Р»РёС€РЅРёРµ Р·РЅР°С‡РєРё РЅР° РџР°РЅРµР»Рё Р·Р°РґР°С‡"
+        "Twk_HideRec" = "РЎРєСЂС‹С‚СЊ СЂР°Р·РґРµР» Р РµРєРѕРјРµРЅРґСѓРµРј РІ РјРµРЅСЋ РџСѓСЃРє"
+        "Twk_StartSet" = "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РѕРє РќР°СЃС‚СЂРѕР№РєРё РІ РјРµРЅСЋ РџСѓСЃРє"
+        "Twk_WallQual" = "РЈРґР°Р»РёС‚СЊ СЃР¶Р°С‚РёРµ РѕР±РѕРµРІ Р Р°Р±РѕС‡РµРіРѕ СЃС‚РѕР»Р°"
+        "Twk_RmLock" = "РЈРґР°Р»РёС‚СЊ СЌРєСЂР°РЅ Р±Р»РѕРєРёСЂРѕРІРєРё"
+        "Twk_NoIconShad" = "РЈРґР°Р»РёС‚СЊ С‚РµРЅРё РЅР° Р·РЅР°С‡РєР°С… Р Р°Р±РѕС‡РµРіРѕ СЃС‚РѕР»Р°"
+        "Twk_ExplPC" = "РћС‚РєСЂС‹РІР°С‚СЊ РџСЂРѕРІРѕРґРЅРёРє РІ Р­С‚РѕС‚ РєРѕРјРїСЊСЋС‚РµСЂ"
+        "Twk_ShowExt" = "РџРѕРєР°Р·С‹РІР°С‚СЊ СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»РѕРІ"
+        "Twk_ClassMenu" = "РљР»Р°СЃСЃРёС‡РµСЃРєРѕРµ РєРѕРЅС‚РµРєСЃС‚РЅРѕРµ РјРµРЅСЋ (Win10)"
+        "Twk_LeftTask" = "РџР°РЅРµР»СЊ Р·Р°РґР°С‡ РїРѕ Р»РµРІРѕРјСѓ РєСЂР°СЋ"
+        
+        "Sec_Compress" = "РЎР¶Р°С‚РёРµ СЃРёСЃС‚РµРјС‹"
+        "Twk_CompOS" = "РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ СЃР¶Р°С‚РёРµ СЃРёСЃС‚РµРјРЅС‹С… С„Р°Р№Р»РѕРІ"
+        "Twk_CompDrive" = "РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ СЃР¶Р°С‚РёРµ СЃРёСЃС‚РµРјРЅС‹С… Рё РїСЂРѕРіСЂР°РјРјРЅС‹С… С„Р°Р№Р»РѕРІ"
+    }
+    "EN" = @{
+        "RebootTitle" = "Optimization Complete!`n`nReboot PC now?"
+        "Yes" = "YES"
+        "No" = "NO"
+        "Optimize" = "APPLY TWEAKS"
+        "LangToggle" = "RU"
+        
+        "Sec_Cleanup" = "Cleanup"
+        "Twk_Updates" = "Remove Windows Update files"
+        "Twk_StoreCache" = "Remove Windows Store cache"
+        "Twk_ExplorerCache" = "Remove Explorer cache"
+        "Twk_WinSxS" = "Clean WinSxS storage"
+        "Twk_JunkFolders" = "Remove junk folders on C: drive"
+        "Twk_OldDrivers" = "Remove old drivers"
+        "Twk_ShellBags" = "Remove ShellBags"
+        
+        "Sec_Preinstalled" = "Preinstalled Apps"
+        "Twk_UWP" = "Remove all UWP apps"
+        "Twk_OneDrive" = "Remove OneDrive"
+        "Twk_RemoteAssist" = "Remove Remote Assistance"
+        "Twk_StartMenu" = "Clean up Start Menu bloatware folders"
+        
+        "Sec_Edge" = "Edge Browser & WebView2"
+        "Twk_Edge" = "Remove Microsoft Edge"
+        "Twk_WebView" = "Remove Edge WebView2"
+        
+        "Sec_Defender" = "Windows Defender"
+        "Twk_Defender" = "Remove Windows Defender (DefenderKiller)"
+        
+        "Sec_Components" = "Windows Components"
+        "Twk_Components" = "Remove all optional components"
+        
+        "Sec_Tasks" = "Task Scheduler"
+        "Twk_Tasks" = "Disable telemetry and diagnostic tasks"
+        
+        "Sec_OptParams" = "System Optimization"
+        "Twk_Hibernate" = "Disable Hibernation"
+        "Twk_ResStorage" = "Disable Reserved Storage"
+        "Twk_RestorePts" = "Disable System Restore Points"
+        "Twk_DelayedSvc" = "Delayed start for automatic services"
+        "Twk_SysLog" = "Minimize system logging"
+        "Twk_BoostIcon" = "Increase icon cache"
+        "Twk_SvcSplit" = "Increase SVC split threshold"
+        "Twk_FastFolder" = "Speed up folder opening"
+        "Twk_DisableVBS" = "Disable VBS and HVCI"
+        "Twk_GameDVR" = "Disable GameDVR"
+        "Twk_UltPerf" = "Enable Ultimate Performance power plan"
+        "Twk_Resume" = "Disable Resume feature"
+        
+        "Sec_WinUpdate" = "Windows Update"
+        "Twk_WUDrivers" = "Disable driver installation from WU"
+        "Twk_DefUpdates" = "Disable Defender malicious software updates"
+        "Twk_PauseUpd" = "Pause updates until 07.07.2077"
+        "Twk_NoAutoUpd" = "Disable automatic updates"
+        
+        "Sec_Useful" = "Useful Tweaks"
+        "Twk_UAC" = "Disable UAC"
+        "Twk_Admin" = "Enable Built-in Administrator account"
+        "Twk_Region" = "Unlock regional restrictions"
+        "Twk_KillFreeze" = "Force kill frozen applications"
+        "Twk_Remote" = "Disable Remote Assistance"
+        "Twk_Sticky" = "Disable Sticky Keys"
+        "Twk_TTL" = "Hide real TTL"
+        "Twk_Notif" = "Disable unwanted notifications and tips"
+        "Twk_DNS" = "Set Cloudflare DNS on Wi-Fi adapters"
+        "Twk_Hosts" = "Block telemetry (hosts file)"
+        
+        "Sec_Drivers" = "Drivers"
+        "Twk_InstallDrv" = "Install drivers (Drivers folder on Desktop)"
+        
+        "Sec_Other" = "Other Components"
+        "Twk_VC" = "Install Visual C++ Redistributable"
+        "Twk_DX" = "Install DirectX 9-11"
+        
+        "Sec_Visual" = "Visual Tweaks"
+        "Twk_Home" = "Remove Home from Explorer"
+        "Twk_Gallery" = "Remove Gallery from Explorer"
+        "Twk_Network" = "Remove Network from Explorer"
+        "Twk_DarkTheme" = "Enable dark system theme"
+        "Twk_Wall" = "Set custom wallpaper"
+        "Twk_BlueIcon" = "Set blue folder icons"
+        "Twk_Icaros" = "Install extended media thumbnails (Icaros)"
+        "Twk_TraySec" = "Show seconds in system tray"
+        "Twk_TrayDate" = "Show date in system tray"
+        "Twk_EndTask" = "Enable End Task on Taskbar"
+        "Twk_RmTaskIcon" = "Remove useless Taskbar icons"
+        "Twk_HideRec" = "Hide Recommended section in Start Menu"
+        "Twk_StartSet" = "Add Settings icon to Start Menu"
+        "Twk_WallQual" = "Disable desktop wallpaper compression"
+        "Twk_RmLock" = "Remove Lock Screen"
+        "Twk_NoIconShad" = "Remove drop shadows on desktop icons"
+        "Twk_ExplPC" = "Open Explorer to This PC"
+        "Twk_ShowExt" = "Show file extensions"
+        "Twk_ClassMenu" = "Classic Context Menu (Win10 style)"
+        "Twk_LeftTask" = "Align Taskbar to left"
+        
+        "Sec_Compress" = "System Compression"
+        "Twk_CompOS" = "Maximum compression of system files (CompactOS)"
+        "Twk_CompDrive" = "Maximum compression of system and program files"
+    }
+}
+
+function L([string]$key) {
+    return $loc[$global:Lang][$key]
+}
+
+$global:locElements = @()
+
+function Register-Loc($element, $key) {
+    $global:locElements += @{ Element = $element; Key = $key }
+    if ($element -is [System.Windows.Controls.Label] -or $element -is [System.Windows.Controls.Button] -or $element -is [System.Windows.Controls.CheckBox]) {
+        $element.Content = L $key
+    }
+    if ($element -is [System.Windows.Controls.TextBlock]) {
+        $element.Text = L $key
+    }
+}
+
+function Update-LanguageUI {
+    foreach ($item in $global:locElements) {
+        if ($item.Element -is [System.Windows.Controls.Label] -or $item.Element -is [System.Windows.Controls.Button] -or $item.Element -is [System.Windows.Controls.CheckBox]) {
+            $item.Element.Content = L $item.Key
+        }
+        if ($item.Element -is [System.Windows.Controls.TextBlock]) {
+            $item.Element.Text = L $item.Key
+        }
+    }
+}
+# ================= Р¤РЈРќРљР¦РР =================
 function Show-RebootPrompt {
     $doneWin = [System.Windows.Window]::new()
     $doneWin.Width = 250; $doneWin.Height = 130; $doneWin.AllowsTransparency = $true; $doneWin.WindowStyle = "None"
@@ -33,11 +270,14 @@ function Show-RebootPrompt {
     $doneStack = [System.Windows.Controls.StackPanel]::new()
     $doneStack.VerticalAlignment = "Center"
     $doneText = [System.Windows.Controls.TextBlock]::new()
-    $doneText.Text = "Настройка завершена!`n`nПерезагрузить ПК?"; $doneText.Foreground = $whiteBrush
+    Register-Loc $doneText "RebootTitle"
+    $doneText.Foreground = $whiteBrush
     $doneText.TextAlignment = "Center"; $doneText.Margin = "0,-5,0,10"; $doneText.FontFamily = "Bahnschrift"
     
     $btnP = [System.Windows.Controls.StackPanel]::new(); $btnP.Orientation = "Horizontal"; $btnP.HorizontalAlignment = "Center"
-    $bR = [System.Windows.Controls.Button]::new(); $bR.Content = "ДА"; $bR.Style = $buttonStyle; $bR.Width = 70; $bR.Height = 28; $bR.FontFamily = "Bahnschrift"
+    $bR = [System.Windows.Controls.Button]::new(); 
+    Register-Loc $bR "Yes"
+    $bR.Style = $buttonStyle; $bR.Width = 70; $bR.Height = 28; $bR.FontFamily = "Bahnschrift"
     
     Set-FadeIn $doneWin
     
@@ -45,10 +285,11 @@ function Show-RebootPrompt {
         Close-WindowAnimated $doneWin
         Start-Process "shutdown.exe" -ArgumentList "/r /t 1 /f" -WindowStyle Hidden
     })
-    $bC = [System.Windows.Controls.Button]::new(); $bC.Content = "НЕТ"; $bC.Style = $buttonStyle; $bC.Width = 70; $bC.Height = 28; $bC.FontFamily = "Bahnschrift"
+    $bC = [System.Windows.Controls.Button]::new(); 
+    Register-Loc $bC "No"
+    $bC.Style = $buttonStyle; $bC.Width = 70; $bC.Height = 28; $bC.FontFamily = "Bahnschrift"
     $bC.Add_Click({ 
         Close-WindowAnimated $doneWin
-        # Если запущено из GUI, основное окно закроется само по логике кнопки "Оптимизировать"
     })
     $bR.Margin = [System.Windows.Thickness]::new(0, 10, 5, 0) 
     $bC.Margin = [System.Windows.Thickness]::new(5, 10, 0, 0)
@@ -140,7 +381,7 @@ function Close-WindowAnimated($win) {
     $win.BeginAnimation([System.Windows.Window]::OpacityProperty, $fadeOut)
 }
 
-# ================= ЦВЕТА И СТИЛИ =================
+# ================= Р¦Р’Р•РўРђ Р РЎРўРР›Р =================
 $darkGrayBrush = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(20,22,25))
 $cardBrush     = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(30,34,40))
 $accentBrush   = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(94,129,172))
@@ -195,104 +436,104 @@ $checkboxTemplate = [System.Windows.Markup.XamlReader]::Parse(@"
 </ControlTemplate>
 "@)
 
-# ================= ВСЕ РАЗДЕЛЫ И ТВИКИ =================
+# ================= Р’РЎР• Р РђР—Р”Р•Р›Р« Р РўР’РРљР =================
 $tweaks = [ordered]@{
-    "Очистка" = @(
-        @("Удалить файлы обновлений", "/RemoveUpdateFiles"),
-        @("Удалить кэш Windows Store", "/RemoveStoreCache"),
-        @("Удалить кэш Проводника", "/RemoveExplorerCache"),
-        @("Очистить хранилище WinSxS", "/CleanWinSxS"),
-        @("Удалить лишние папки на диске C:", "/RemoveJunkFolders"),
-        @("Удалить старые драйвера", "/RemoveOldDrivers"),
-        @("Удалить ShellBags", "/RemoveShellBags")
+    "Sec_Cleanup" = @(
+        @("Twk_Updates", "/RemoveUpdateFiles"),
+        @("Twk_StoreCache", "/RemoveStoreCache"),
+        @("Twk_ExplorerCache", "/RemoveExplorerCache"),
+        @("Twk_WinSxS", "/CleanWinSxS"),
+        @("Twk_JunkFolders", "/RemoveJunkFolders"),
+        @("Twk_OldDrivers", "/RemoveOldDrivers"),
+        @("Twk_ShellBags", "/RemoveShellBags")
     )
-    "Предустановленные приложения" = @(
-        @("Удалить все UWP-приложения", "/RemoveAppx"),
-        @("Удалить OneDrive", "/RemoveOneDrive"),
-        @("Удалить Помощника по удаленному подключению", "/RemoveRemoteAssistant"),
-        @("Удалить лишние папки приложений в Пуске", "/CleanStartMenu")
+    "Sec_Preinstalled" = @(
+        @("Twk_UWP", "/RemoveAppx"),
+        @("Twk_OneDrive", "/RemoveOneDrive"),
+        @("Twk_RemoteAssist", "/RemoveRemoteAssistant"),
+        @("Twk_StartMenu", "/CleanStartMenu")
     )
-    "Браузер Edge и WebView2" = @(
-        @("Удалить Microsoft Edge", "/RemoveEdge"),
-        @("Удалить Edge WebView2", "/RemoveEdgeWebView")
+    "Sec_Edge" = @(
+        @("Twk_Edge", "/RemoveEdge"),
+        @("Twk_WebView", "/RemoveEdgeWebView")
     )
-    "Защитник Windows" = @(
-        ,@("Удалить Защитник Windows (DefenderKiller)", "/RemoveDefender")
+    "Sec_Defender" = @(
+        ,@("Twk_Defender", "/RemoveDefender")
     )
-	"Компоненты Windows" = @(
-        ,@("Удалить все дополнительные компоненты", "/RemoveComponents")
+	"Sec_Components" = @(
+        ,@("Twk_Components", "/RemoveComponents")
     )
-    "Планировщик задач" = @(
-        ,@("Отключить задачи телеметрии и проверок", "/DisableTasks")
+    "Sec_Tasks" = @(
+        ,@("Twk_Tasks", "/DisableTasks")
     )
-    "Оптимизация параметров" = @(
-        @("Отключить Гибернацию", "/DisableHibernate"),
-		@("Отключить Зарезервированное хранилище", "/DisableReservedStorage"),
-        @("Отключить Точки восстановления", "/DisableRestorePoints"),
-		@("Отложенный запуск автоматических служб", "/DelayedServices"),
-		@("Минимизировать системные отчеты", "/SystemLog"),
-		@("Увеличить кэш иконок", "/BoostIconCache"),
-		@("Увеличить порог разделения SVC", "/SvcSplit"),
-		@("Ускорить открытие папок", "/FastFolders"),
-		@("Отключить VBS и HVCI", "/DisableVBS"),
-        @("Отключить GameDVR", "/DisableGameDVR"),
-		@("Установить схему питания Максимальная производительность", "/UltimatePerformance"),
-		@("Отключить функцию Возобновить", "/DisableResume")
+    "Sec_OptParams" = @(
+        @("Twk_Hibernate", "/DisableHibernate"),
+		@("Twk_ResStorage", "/DisableReservedStorage"),
+        @("Twk_RestorePts", "/DisableRestorePoints"),
+		@("Twk_DelayedSvc", "/DelayedServices"),
+		@("Twk_SysLog", "/SystemLog"),
+		@("Twk_BoostIcon", "/BoostIconCache"),
+		@("Twk_SvcSplit", "/SvcSplit"),
+		@("Twk_FastFolder", "/FastFolders"),
+		@("Twk_DisableVBS", "/DisableVBS"),
+        @("Twk_GameDVR", "/DisableGameDVR"),
+		@("Twk_UltPerf", "/UltimatePerformance"),
+		@("Twk_Resume", "/DisableResume")
     )
-    "Центр обновления Windows" = @(
-        @("Запретить установку драйверов из ЦО", "/DisableWUDrivers"),
-		@("Запретить обновления удаления вредоносных программ", "/DisableDefenderUpdates"),
-		@("Установить паузу обновлений до 07.07.2077", "/PauseUpdates"),
-		@("Запретить автоматические обновления", "/DisableAutoUpdates")
+    "Sec_WinUpdate" = @(
+        @("Twk_WUDrivers", "/DisableWUDrivers"),
+		@("Twk_DefUpdates", "/DisableDefenderUpdates"),
+		@("Twk_PauseUpd", "/PauseUpdates"),
+		@("Twk_NoAutoUpd", "/DisableAutoUpdates")
     )
-    "Полезные твики" = @(
-        @("Отключить UAC", "/DisableUAC"),
-		@("Сделать учетную запись Административной", "/EnableAdmin"),
-		@("Снять региональные ограничения", "/UnlockRegion"),
-		@("Принудительно завершать программы при зависании", "/KillFreezeApps"),
-		@("Отключить Удаленный помощник", "/DisableRemote"),
-		@("Отключить залипание клавиш", "/DisableStickyKeys"),
-		@("Скрыть реальный TTL", "/TTL"),
-		@("Отключить лишние уведомления и рекомендации", "/DisableNotificationsAds"),
-		@("Установить DNS Cloudflare на Wi-Fi адаптеры", "/DNS"),
-		@("Блокировка телеметрии (hosts)", "/BlockTelemetry")
+    "Sec_Useful" = @(
+        @("Twk_UAC", "/DisableUAC"),
+		@("Twk_Admin", "/EnableAdmin"),
+		@("Twk_Region", "/UnlockRegion"),
+		@("Twk_KillFreeze", "/KillFreezeApps"),
+		@("Twk_Remote", "/DisableRemote"),
+		@("Twk_Sticky", "/DisableStickyKeys"),
+		@("Twk_TTL", "/TTL"),
+		@("Twk_Notif", "/DisableNotificationsAds"),
+		@("Twk_DNS", "/DNS"),
+		@("Twk_Hosts", "/BlockTelemetry")
     )
-    "Драйверы" = @(
-        ,@("Установить драйверы (Папка Drivers на Рабочем столе)", "/InstallDrivers")
+    "Sec_Drivers" = @(
+        ,@("Twk_InstallDrv", "/InstallDrivers")
 	)
-	"Другие компоненты" = @(
-        @("Установить Visual C++", "/InstallVC"),
-        @("Установить DirectX 9-11", "/InstallDX")
+	"Sec_Other" = @(
+        @("Twk_VC", "/InstallVC"),
+        @("Twk_DX", "/InstallDX")
     )
-    "Визуальные твики" = @(
-        @("Удалить пункт Главная в Проводнике", "/RemoveHome"),
-        @("Удалить пункт Галерея в Проводнике", "/RemoveGallery"),
-        @("Удалить пункт Сеть в Проводнике", "/RemoveNetwork"),
-		@("Установить темную тему системы", "/DarkTheme"),
-		@("Установить кастомные обои", "/SetWallpaper"),
-		@("Установить синие папки", "/BlueIcons"),
-		@("Установить дополнительные эскизы медиафайлов (Icaros)", "/Icaros"),
-		@("Установить секунды в трее", "/TraySeconds"),
-		@("Установить дату в трее", "/TrayDate"),
-		@("Установить пункт Завершить задачу на Панели задач", "/TaskbarEndTask"),
-		@("Удалить лишние значки на Панели задач", "/RemoveTaskbarIcons"),
-		@("Скрыть раздел Рекомендуем в меню Пуск", "/HideRecommended"),
-		@("Установить значок Настройки в меню Пуск", "/StartSettingsIcon"),
-		@("Удалить сжатие обоев Рабочего стола", "/WallpaperQuality"),
-		@("Удалить экран блокировки", "/RemoveLockScreen"),
-		@("Удалить тени на значках Рабочего стола", "/NoIconShadow"),
-		@("Открывать Проводник в Этот компьютер", "/ExplorerThisPC"),
-		@("Показывать расширения файлов", "/ShowExtensions"),
-		@("Классическое контекстное меню (Win10)", "/ClassicContextMenu"),
-		@("Панель задач по левому краю", "/LeftTaskbar")
+    "Sec_Visual" = @(
+        @("Twk_Home", "/RemoveHome"),
+        @("Twk_Gallery", "/RemoveGallery"),
+        @("Twk_Network", "/RemoveNetwork"),
+		@("Twk_DarkTheme", "/DarkTheme"),
+		@("Twk_Wall", "/SetWallpaper"),
+		@("Twk_BlueIcon", "/BlueIcons"),
+		@("Twk_Icaros", "/Icaros"),
+		@("Twk_TraySec", "/TraySeconds"),
+		@("Twk_TrayDate", "/TrayDate"),
+		@("Twk_EndTask", "/TaskbarEndTask"),
+		@("Twk_RmTaskIcon", "/RemoveTaskbarIcons"),
+		@("Twk_HideRec", "/HideRecommended"),
+		@("Twk_StartSet", "/StartSettingsIcon"),
+		@("Twk_WallQual", "/WallpaperQuality"),
+		@("Twk_RmLock", "/RemoveLockScreen"),
+		@("Twk_NoIconShad", "/NoIconShadow"),
+		@("Twk_ExplPC", "/ExplorerThisPC"),
+		@("Twk_ShowExt", "/ShowExtensions"),
+		@("Twk_ClassMenu", "/ClassicContextMenu"),
+		@("Twk_LeftTask", "/LeftTaskbar")
     )
-    "Сжатие системы" = @(
-        @("Максимальное сжатие системных файлов", "/CompressOS"),
-		@("Максимальное сжатие системных и программных файлов", "/CompressDrive")
+    "Sec_Compress" = @(
+        @("Twk_CompOS", "/CompressOS"),
+		@("Twk_CompDrive", "/CompressDrive")
     )
 }
 
-# ================= КОНСТРУКТОР UI =================
+# ================= РљРћРќРЎРўР РЈРљРўРћР  UI =================
 $window = [System.Windows.Window]::new()
 $window.Title = "SysTweakX"
 $window.Width = 450
@@ -337,13 +578,34 @@ $navStack = [System.Windows.Controls.StackPanel]::new()
 $navStack.Orientation = "Horizontal"
 $navCard.Child = $navStack
 
+# Language Toggle
+$langToggle = [System.Windows.Controls.Label]::new()
+Register-Loc $langToggle "LangToggle"
+$langToggle.FontSize = 11; $langToggle.FontWeight = [System.Windows.FontWeights]::Bold
+$langToggle.Foreground = [System.Windows.Media.Brushes]::LightGray; $langToggle.FontFamily = "Bahnschrift"
+$langToggle.Cursor = [System.Windows.Input.Cursors]::Hand
+$langToggle.VerticalAlignment = "Center"; $langToggle.Margin = [System.Windows.Thickness]::new(2,-2,2,0)
+$langToggle.Add_MouseEnter({ $this.Foreground = $accentBrush })
+$langToggle.Add_MouseLeave({ $this.Foreground = [System.Windows.Media.Brushes]::LightGray })
+$langToggle.Add_MouseDown({
+    if ($global:Lang -eq "RU") { $global:Lang = "EN" } else { $global:Lang = "RU" }
+    Update-LanguageUI
+})
+$navStack.Children.Add($langToggle) | Out-Null
+
+$sep1 = [System.Windows.Controls.Border]::new()
+$sep1.Width = 1; $sep1.Height = 14; $sep1.Background = [System.Windows.Media.Brushes]::Gray
+$sep1.Opacity = 0.3; $sep1.Margin = [System.Windows.Thickness]::new(4,0,4,0)
+$sep1.VerticalAlignment = "Center"
+$navStack.Children.Add($sep1) | Out-Null
+
 $navStack.Children.Add((Create-IconButton "GitHub.ico" "https://github.com/dimazzq92" "GitHub")) | Out-Null
 
-$sep = [System.Windows.Controls.Border]::new()
-$sep.Width = 1; $sep.Height = 14; $sep.Background = [System.Windows.Media.Brushes]::Gray
-$sep.Opacity = 0.3; $sep.Margin = [System.Windows.Thickness]::new(4,0,4,0)
-$sep.VerticalAlignment = "Center"
-$navStack.Children.Add($sep) | Out-Null
+$sep2 = [System.Windows.Controls.Border]::new()
+$sep2.Width = 1; $sep2.Height = 14; $sep2.Background = [System.Windows.Media.Brushes]::Gray
+$sep2.Opacity = 0.3; $sep2.Margin = [System.Windows.Thickness]::new(4,0,4,0)
+$sep2.VerticalAlignment = "Center"
+$navStack.Children.Add($sep2) | Out-Null
 
 $closeWrapper = [System.Windows.Controls.Border]::new()
 $closeWrapper.Width = 24; $closeWrapper.Height = 24
@@ -441,7 +703,7 @@ $root.Children.Add($scroll) | Out-Null
 
 $allCBs = [System.Collections.Generic.List[System.Windows.Controls.CheckBox]]::new()
 
-foreach ($sec in $tweaks.Keys) {
+foreach ($secKey in $tweaks.Keys) {
     $card = [System.Windows.Controls.Border]::new()
     $card.Background = $cardBrush; $card.CornerRadius = [System.Windows.CornerRadius]::new(10)
     $card.Margin = [System.Windows.Thickness]::new(0,0,0,20); $card.Padding = [System.Windows.Thickness]::new(15)
@@ -453,7 +715,8 @@ foreach ($sec in $tweaks.Keys) {
     $sectionCBs = [System.Collections.Generic.List[System.Windows.Controls.CheckBox]]::new()
 
 	$secHeader = [System.Windows.Controls.Label]::new()
-    $secHeader.Content = $sec.ToUpper(); $secHeader.FontSize = 12; $secHeader.FontWeight = [System.Windows.FontWeights]::Bold 
+    Register-Loc $secHeader $secKey
+    $secHeader.FontSize = 12; $secHeader.FontWeight = [System.Windows.FontWeights]::Bold 
     $secHeader.Foreground = [System.Windows.Media.Brushes]::LightGray; $secHeader.Margin = [System.Windows.Thickness]::new(-5,-5,0,12)
     $secHeader.Cursor = [System.Windows.Input.Cursors]::Hand; $secHeader.Tag = $sectionCBs; $secHeader.FontFamily = "Bahnschrift"
     
@@ -470,12 +733,13 @@ foreach ($sec in $tweaks.Keys) {
     
     $cardStack.Children.Add($secHeader) | Out-Null
 
-    $currentList = $tweaks[$sec]
+    $currentList = $tweaks[$secKey]
     if ($currentList.Count -eq 2 -and $currentList[0] -is [string]) { $currentList = ,$currentList }
 
 	foreach ($tweak in $currentList) {
         $cb = [System.Windows.Controls.CheckBox]::new()
-        $cb.Content = $tweak[0]; $cb.Tag = $tweak[1]; $cb.Template = $checkboxTemplate
+        Register-Loc $cb $tweak[0]
+        $cb.Tag = $tweak[1]; $cb.Template = $checkboxTemplate
         $cb.Foreground = [System.Windows.Media.Brushes]::Gray; $cb.Margin = [System.Windows.Thickness]::new(0,0,5,5)
         $cb.FontSize = 11; $cb.Cursor = [System.Windows.Input.Cursors]::Hand; $cb.FontFamily = "Bahnschrift"
 
@@ -498,7 +762,7 @@ foreach ($sec in $tweaks.Keys) {
 
 $headerTxt.Tag = $allCBs
 
-# ================= ЛОГИКА СЖАТИЯ =================
+# ================= Р›РћР“РРљРђ РЎР–РђРўРРЇ =================
 $cbCompressOS = $allCBs | Where-Object { $_.Tag -eq "/CompressOS" }
 $cbCompressDrive = $allCBs | Where-Object { $_.Tag -eq "/CompressDrive" }
 
@@ -525,7 +789,7 @@ $cbCompressDrive.Add_Checked({
 })
 
 $btnOpt = [System.Windows.Controls.Button]::new()
-$btnOpt.Content = "ОПТИМИЗИРОВАТЬ"
+Register-Loc $btnOpt "Optimize"
 $btnOpt.Style = $buttonStyle
 $btnOpt.Cursor = [System.Windows.Input.Cursors]::Hand
 $btnOpt.FontFamily = "Bahnschrift"
@@ -539,6 +803,7 @@ $btnOpt.Add_Click({
     if ($selected.Count -eq 0) { return }
 
     $argsString = ($selected | ForEach-Object { $_.Tag }) -join " "
+    $argsString += " /Lang=$global:Lang"
 	$global:IsApplying = $true
 	Close-WindowAnimated $window
 	$proc = Start-Process cmd.exe -ArgumentList "/c call `"$batPath`" $argsString" -Verb RunAs -PassThru
@@ -558,7 +823,4 @@ if ($ShowReboot) {
 if (-not $global:IsApplying) {
     Start-Process "cmd.exe" -ArgumentList "/c timeout /t 2 >nul & rmdir /s /q `"$PSScriptRoot`"" -WindowStyle Hidden
 }
-
-
-
 

@@ -732,83 +732,83 @@ REM Сжатие системы
 
 :WinVer
     for /f "skip=2 tokens=3" %%a in ('2^>nul reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v CurrentBuildNumber') do set /a build=%%a
-    if !build! LSS 22000 start /b "" Helper /Overlay "Утилита предназначена для Windows 11" /Font "Bahnschrift" /Size "40" && Helper /HideConsole && timeout /t 4 /nobreak >nul && start /b "" Helper /Overlay && exit
+    if !build! LSS 22000 ( if "!LANG!"=="EN" ( start /b "" Helper /Overlay "This utility is intended for Windows 11" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Утилита предназначена для Windows 11" /Font "Bahnschrift" /Size "40" ) ) && Helper /HideConsole && timeout /t 4 /nobreak >nul && start /b "" Helper /Overlay && exit
     exit /b
 
 :RemoveOverlay
-    start /b "" Helper /Overlay "Удаление мусора" /Font "Bahnschrift Bold" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Removing junk files" /Font "Bahnschrift Bold" /Size "40" ) else ( start /b "" Helper /Overlay "Удаление мусора" /Font "Bahnschrift Bold" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :AppOverlay
-    start /b "" Helper /Overlay "Удаление предустановленных приложений" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Removing preinstalled apps" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Удаление предустановленных приложений" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
 
 :EdgeOverlay
-    start /b "" Helper /Overlay "Удаление браузера Edge" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Removing Edge browser" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Удаление браузера Edge" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :WebViewOverlay
-    start /b "" Helper /Overlay "Удаление компонента WebView2" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Removing WebView2 component" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Удаление компонента WebView2" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :DefenderOverlay
-    start /b "" Helper /Overlay "Удаление Защитника Windows" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Removing Windows Defender" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Удаление Защитника Windows" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :ComponentsOverlay
-    start /b "" Helper /Overlay "Удаление дополнительных компонентов" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Removing optional components" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Удаление дополнительных компонентов" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :TasksOverlay
-    start /b "" Helper /Overlay "Отключение лишнего в Планировщике задач" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Disabling unnecessary tasks" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Отключение лишнего в Планировщике задач" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
 
 :OptimizationOverlay
-    start /b "" Helper /Overlay "Оптимизация параметров" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Optimizing system parameters" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Оптимизация параметров" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :UpdateOverlay
-    start /b "" Helper /Overlay "Настройка Центра обновления Windows" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Configuring Windows Update" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Настройка Центра обновления Windows" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :TweaksOverlay
-    start /b "" Helper /Overlay "Применение полезных твиков" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Applying useful tweaks" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Применение полезных твиков" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :DriversOverlay
-    start /b "" Helper /Overlay "Установка драйверов" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Installing drivers" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Установка драйверов" /Font "Bahnschrift" /Size "40" )
     timeout /t 2 /nobreak >nul 2>&1
     exit /b
 
 :DirectXOverlay
-    start /b "" Helper /Overlay "Установка DirectX 9-11" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Installing DirectX 9-11" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Установка DirectX 9-11" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
 
 :VisualCOverlay
-    start /b "" Helper /Overlay "Установка Visual C++" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Installing Visual C++" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Установка Visual C++" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
     
 :VisualOverlay
-    start /b "" Helper /Overlay "Установка визуальных твиков" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Applying visual tweaks" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Установка визуальных твиков" /Font "Bahnschrift" /Size "40" )
     timeout /t 1 /nobreak >nul 2>&1
     exit /b
 
 :CompressOverlay
-    start /b "" Helper /Overlay "Сжатие системных файлов" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Compressing system files" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Сжатие системных файлов" /Font "Bahnschrift" /Size "40" )
     exit /b
     
 :CompressDriveOverlay
-    start /b "" Helper /Overlay "Сжатие системных и программных файлов" /Font "Bahnschrift" /Size "40"
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Compressing system and program files" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Сжатие системных и программных файлов" /Font "Bahnschrift" /Size "40" )
     exit /b
