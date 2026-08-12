@@ -1,4 +1,4 @@
-param(
+﻿param(
     [switch]$ShowReboot
 )
 
@@ -558,4 +558,5 @@ if ($ShowReboot) {
 if (-not $global:IsApplying) {
     Start-Process "cmd.exe" -ArgumentList "/c timeout /t 2 >nul & rmdir /s /q `"$PSScriptRoot`"" -WindowStyle Hidden
 }
+
 
