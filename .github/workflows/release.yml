@@ -1,0 +1,44 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Create WinRAR SFX
+        run: |
+          $ErrorActionPreference = "Stop"
+          
+          # Download and install WinRAR silently
+          Invoke-WebRequest -Uri "https://www.rarlab.com/rar/winrar-x64-624.exe" -OutFile "winrar.exe"
+          Start-Process -FilePath ".\winrar.exe" -ArgumentList "/S" -Wait
+          
+          # Create SFX config file
+          $config = "Path=%temp%\SysTweakX`r`nSetup=powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File GUI.ps1`r`nSilent=1`r`nOverwrite=1"
+          Set-Content -Path "config.txt" -Value $config -Encoding Ascii
+          
+          # Create the SFX archive
+          & "C:\Program Files\WinRAR\Rar.exe" a -sfx -s -m5 -z"config.txt" SysTweakX.exe GUI.ps1 SysTweakX.bat Work
+          
+      - name: Create or Update Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: SysTweakX.exe
+          tag_name: Release
+          name: SysTweakX Release
+          body: "Автоматическая сборка портативной версии SysTweakX."
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
