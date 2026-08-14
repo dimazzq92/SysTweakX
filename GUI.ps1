@@ -32,33 +32,32 @@ if ([string]::IsNullOrEmpty($Lang)) {
 
 $loc = @{
     "RU" = @{
-        "AppTitle"        = "SysTweakX"
-        "AppSubtitle"     = "v3.0 Pro • Windows 11 25H2 Edition"
-        "RebootTitle"     = "Настройка успешно завершена!`n`nПерезагрузить компьютер сейчас?"
-        "Yes"             = "ДА"
-        "No"              = "НЕТ"
-        "Optimize"        = "ПРИМЕНИТЬ ТВCamp"
-        "OptimizeBtn"     = "ОПТИМИЗИРОВАТЬ"
-        "SelectedCount"   = "Выбрано: {0} из {1} твиков"
+        "AppTitle"          = "SysTweakX"
+        "AppSubtitle"       = "v3.0 Pro • Windows 11 25H2 Edition"
+        "RebootTitle"       = "Настройка успешно завершена!`n`nПерезагрузить компьютер сейчас?"
+        "Yes"               = "ДА"
+        "No"                = "НЕТ"
+        "OptimizeBtn"       = "ОПТИМИЗИРОВАТЬ"
+        "SelectedCount"     = "Выбрано: {0} из {1} твиков"
         "SearchPlaceholder" = "Поиск твиков..."
-        "LangToggle"      = "EN"
+        "LangToggle"        = "EN"
 
         # Пресеты
-        "Preset_All"      = "Выбрать всё"
-        "Preset_None"     = "Снять всё"
-        "Preset_Rec"      = "⭐ Рекомендуемый"
-        "Preset_Game"     = "🎮 Игровой"
-        "Preset_Privacy"  = "🔒 Приватность"
-        "Preset_Clean"    = "🧹 Очистка"
+        "Preset_All"        = "Все"
+        "Preset_None"       = "Сбросить"
+        "Preset_Rec"        = "⭐ Рекомендуемый"
+        "Preset_Game"       = "🎮 Игровой"
+        "Preset_Privacy"    = "🔒 Приватность"
+        "Preset_Clean"      = "🧹 Очистка"
 
         # Категории (Sidebar)
-        "Cat_All"         = "📋 Все твики"
-        "Cat_Privacy"     = "🛡️ Приватность и AI"
-        "Cat_Performance" = "⚡ Производительность"
-        "Cat_Interface"   = "🎨 Интерфейс и Панель"
-        "Cat_Cleanup"     = "🗑️ Очистка и Удаление"
-        "Cat_Updates"     = "🔄 Обновления и Службы"
-        "Cat_Runtimes"    = "🧰 Драйверы и Сжатие"
+        "Cat_All"           = "Все твики"
+        "Cat_Privacy"       = "Приватность и AI"
+        "Cat_Performance"   = "Производительность"
+        "Cat_Interface"     = "Интерфейс и Панель"
+        "Cat_Cleanup"       = "Очистка и Удаление"
+        "Cat_Updates"       = "Обновления и Службы"
+        "Cat_Runtimes"      = "Драйверы и Сжатие"
 
         # 1. Приватность и AI (25H2)
         "Twk_Recall"           = "Отключить Windows Recall (AI снимки экрана)"
@@ -150,33 +149,32 @@ $loc = @{
     }
 
     "EN" = @{
-        "AppTitle"        = "SysTweakX"
-        "AppSubtitle"     = "v3.0 Pro • Windows 11 25H2 Edition"
-        "RebootTitle"     = "Optimization Complete!`n`nRestart computer now?"
-        "Yes"             = "YES"
-        "No"              = "NO"
-        "Optimize"        = "APPLY TWEAKS"
-        "OptimizeBtn"     = "OPTIMIZE NOW"
-        "SelectedCount"   = "Selected: {0} of {1} tweaks"
+        "AppTitle"          = "SysTweakX"
+        "AppSubtitle"       = "v3.0 Pro • Windows 11 25H2 Edition"
+        "RebootTitle"       = "Optimization Complete!`n`nRestart computer now?"
+        "Yes"               = "YES"
+        "No"                = "NO"
+        "OptimizeBtn"       = "OPTIMIZE NOW"
+        "SelectedCount"     = "Selected: {0} of {1} tweaks"
         "SearchPlaceholder" = "Search tweaks..."
-        "LangToggle"      = "RU"
+        "LangToggle"        = "RU"
 
         # Presets
-        "Preset_All"      = "Select All"
-        "Preset_None"     = "Deselect All"
-        "Preset_Rec"      = "⭐ Recommended"
-        "Preset_Game"     = "🎮 Gaming"
-        "Preset_Privacy"  = "🔒 Privacy"
-        "Preset_Clean"    = "🧹 Deep Clean"
+        "Preset_All"        = "All"
+        "Preset_None"       = "Reset"
+        "Preset_Rec"        = "⭐ Recommended"
+        "Preset_Game"       = "🎮 Gaming"
+        "Preset_Privacy"    = "🔒 Privacy"
+        "Preset_Clean"      = "🧹 Deep Clean"
 
         # Categories
-        "Cat_All"         = "📋 All Tweaks"
-        "Cat_Privacy"     = "🛡️ Privacy & AI"
-        "Cat_Performance" = "⚡ Performance"
-        "Cat_Interface"   = "🎨 UI & Taskbar"
-        "Cat_Cleanup"     = "🗑️ Cleanup & Debloat"
-        "Cat_Updates"     = "🔄 Updates & Services"
-        "Cat_Runtimes"    = "🧰 Runtimes & More"
+        "Cat_All"           = "All Tweaks"
+        "Cat_Privacy"       = "Privacy & AI"
+        "Cat_Performance"   = "Performance"
+        "Cat_Interface"     = "UI & Taskbar"
+        "Cat_Cleanup"       = "Cleanup & Debloat"
+        "Cat_Updates"       = "Updates & Services"
+        "Cat_Runtimes"      = "Runtimes & More"
 
         # 1. Privacy & AI (25H2)
         "Twk_Recall"           = "Disable Windows Recall (AI snapshots)"
@@ -278,9 +276,10 @@ function L([string]$key) {
 # ================= СПИСОК ВСЕХ ТВCampОВ =================
 $categories = @(
     @{
-        Key   = "Cat_Privacy"
-        Icon  = "🛡️"
-        Items = @(
+        Key       = "Cat_Privacy"
+        Icon      = "🛡️"
+        IconColor = "#38BDF8"  # Cyan / Sky Blue
+        Items     = @(
             @("Twk_Recall",          "/DisableRecall",         $true,  "rec,privacy"),
             @("Twk_Copilot",         "/DisableCopilot",        $true,  "rec,privacy"),
             @("Twk_BingSearch",      "/DisableBingSearch",     $true,  "rec,privacy,game"),
@@ -295,9 +294,10 @@ $categories = @(
         )
     },
     @{
-        Key   = "Cat_Performance"
-        Icon  = "⚡"
-        Items = @(
+        Key       = "Cat_Performance"
+        Icon      = "⚡"
+        IconColor = "#FBBF24"  # Amber / Gold
+        Items     = @(
             @("Twk_HAGS",            "/EnableHAGS",            $true,  "rec,game"),
             @("Twk_GameDVR",         "/DisableGameDVR",        $true,  "rec,game"),
             @("Twk_NetThrottling",   "/DisableNetThrottling",  $true,  "rec,game"),
@@ -316,9 +316,10 @@ $categories = @(
         )
     },
     @{
-        Key   = "Cat_Interface"
-        Icon  = "🎨"
-        Items = @(
+        Key       = "Cat_Interface"
+        Icon      = "🎨"
+        IconColor = "#F472B6"  # Pink / Magenta
+        Items     = @(
             @("Twk_ClassMenu",       "/ClassicContextMenu",    $true,  "rec"),
             @("Twk_LeftTask",        "/LeftTaskbar",           $false, "rec"),
             @("Twk_DarkTheme",       "/DarkTheme",             $true,  "rec"),
@@ -342,9 +343,10 @@ $categories = @(
         )
     },
     @{
-        Key   = "Cat_Cleanup"
-        Icon  = "🗑️"
-        Items = @(
+        Key       = "Cat_Cleanup"
+        Icon      = "🗑️"
+        IconColor = "#F87171"  # Coral Red
+        Items     = @(
             @("Twk_Updates",         "/RemoveUpdateFiles",     $true,  "rec,clean"),
             @("Twk_StoreCache",      "/RemoveStoreCache",      $true,  "rec,clean"),
             @("Twk_ExplorerCache",   "/RemoveExplorerCache",   $true,  "rec,clean"),
@@ -363,9 +365,10 @@ $categories = @(
         )
     },
     @{
-        Key   = "Cat_Updates"
-        Icon  = "🔄"
-        Items = @(
+        Key       = "Cat_Updates"
+        Icon      = "🔄"
+        IconColor = "#A78BFA"  # Violet / Purple
+        Items     = @(
             @("Twk_DeliveryOpt",     "/DisableDeliveryOpt",    $true,  "rec,game,privacy"),
             @("Twk_NoAutoUpd",       "/DisableAutoUpdates",    $false, ""),
             @("Twk_WUDrivers",       "/DisableWUDrivers",      $false, "game"),
@@ -379,9 +382,10 @@ $categories = @(
         )
     },
     @{
-        Key   = "Cat_Runtimes"
-        Icon  = "🧰"
-        Items = @(
+        Key       = "Cat_Runtimes"
+        Icon      = "🧰"
+        IconColor = "#34D399"  # Mint Green / Emerald
+        Items     = @(
             @("Twk_VC",              "/InstallVC",             $false, "rec"),
             @("Twk_DX",              "/InstallDX",             $false, "rec"),
             @("Twk_InstallDrv",      "/InstallDrivers",        $false, ""),
@@ -419,6 +423,7 @@ function Update-AllLanguageUI {
         Update-SingleLoc $item.Element $item.Key $item.Property
     }
     Update-SummaryCount
+    Filter-Tweaks
 }
 
 # ================= ЦВЕТА И СТИЛИ =================
@@ -426,19 +431,28 @@ $bgBrush         = [System.Windows.Media.SolidColorBrush]::new([System.Windows.M
 $sidebarBgBrush  = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(20, 24, 30))
 $cardBgBrush     = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(26, 31, 39))
 $cardHoverBrush  = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(34, 41, 52))
-$cardActiveBrush = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(30, 38, 48))
+$cardActiveBrush = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(24, 36, 50))
 $accentBrush     = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(0, 120, 212))
 $accentHoverBrush= [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(30, 144, 255))
 $borderBrush     = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(45, 52, 64))
 $textPrimary     = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(240, 243, 246))
-$textSecondary   = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(140, 150, 165))
-$textMuted       = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(90, 100, 115))
+$textSecondary   = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(150, 160, 175))
+$textMuted       = [System.Windows.Media.SolidColorBrush]::new([System.Windows.Media.Color]::FromRgb(95, 105, 120))
+
+function Get-Brush([string]$hex) {
+    try {
+        $color = [System.Windows.Media.ColorConverter]::ConvertFromString($hex)
+        return [System.Windows.Media.SolidColorBrush]::new($color)
+    } catch {
+        return $accentBrush
+    }
+}
 
 # ================= АНИМАЦИИ =================
 function Set-FadeIn($win) {
     $win.Opacity = 0
     $win.Add_Loaded({
-        $fadeIn = [System.Windows.Media.Animation.DoubleAnimation]::new(0, 1, [System.Windows.Duration]::new([TimeSpan]::FromMilliseconds(250)))
+        $fadeIn = [System.Windows.Media.Animation.DoubleAnimation]::new(0, 1, [System.Windows.Duration]::new([TimeSpan]::FromMilliseconds(220)))
         $fadeIn.EasingFunction = [System.Windows.Media.Animation.QuadraticEase]::new()
         $this.BeginAnimation([System.Windows.Window]::OpacityProperty, $fadeIn)
     })
@@ -447,7 +461,7 @@ function Set-FadeIn($win) {
 function Close-WindowAnimated($win) {
     if ($win.Tag -eq "Closing") { return }
     $win.Tag = "Closing"
-    $fadeOut = [System.Windows.Media.Animation.DoubleAnimation]::new($win.Opacity, 0, [System.Windows.Duration]::new([TimeSpan]::FromMilliseconds(200)))
+    $fadeOut = [System.Windows.Media.Animation.DoubleAnimation]::new($win.Opacity, 0, [System.Windows.Duration]::new([TimeSpan]::FromMilliseconds(180)))
     $fadeOut.Add_Completed({ $win.Close() }.GetNewClosure())
     $win.BeginAnimation([System.Windows.Window]::OpacityProperty, $fadeOut)
 }
@@ -506,10 +520,10 @@ if ($ShowReboot) {
 # ================= ГЛАВНОЕ ОКНО =================
 $window = [System.Windows.Window]::new()
 $window.Title = "SysTweakX v3.0 Pro"
-$window.Width = 920
-$window.Height = 650
-$window.MinWidth = 800
-$window.MinHeight = 550
+$window.Width = 980
+$window.Height = 670
+$window.MinWidth = 850
+$window.MinHeight = 580
 $window.AllowsTransparency = $true
 $window.WindowStyle = "None"
 $window.WindowStartupLocation = "CenterScreen"
@@ -523,9 +537,9 @@ $mainBorder.BorderThickness = [System.Windows.Thickness]::new(1.2)
 $mainBorder.BorderBrush = $borderBrush
 
 $mainGrid = [System.Windows.Controls.Grid]::new()
-$rowTop = [System.Windows.Controls.RowDefinition]::new(); $rowTop.Height = [System.Windows.GridLength]::new(56, [System.Windows.GridUnitType]::Pixel)
+$rowTop = [System.Windows.Controls.RowDefinition]::new(); $rowTop.Height = [System.Windows.GridLength]::new(54, [System.Windows.GridUnitType]::Pixel)
 $rowMid = [System.Windows.Controls.RowDefinition]::new(); $rowMid.Height = [System.Windows.GridLength]::new(1, [System.Windows.GridUnitType]::Star)
-$rowBot = [System.Windows.Controls.RowDefinition]::new(); $rowBot.Height = [System.Windows.GridLength]::new(64, [System.Windows.GridUnitType]::Pixel)
+$rowBot = [System.Windows.Controls.RowDefinition]::new(); $rowBot.Height = [System.Windows.GridLength]::new(62, [System.Windows.GridUnitType]::Pixel)
 $mainGrid.RowDefinitions.Add($rowTop)
 $mainGrid.RowDefinitions.Add($rowMid)
 $mainGrid.RowDefinitions.Add($rowBot)
@@ -545,6 +559,7 @@ $titleStack.Margin = [System.Windows.Thickness]::new(20, 0, 0, 0)
 $iconBlock = [System.Windows.Controls.TextBlock]::new()
 $iconBlock.Text = "⚡"
 $iconBlock.FontSize = 20
+$iconBlock.Foreground = Get-Brush "#FBBF24"
 $iconBlock.VerticalAlignment = "Center"
 $iconBlock.Margin = [System.Windows.Thickness]::new(0, 0, 10, 0)
 
@@ -567,40 +582,16 @@ $titleStack.Children.Add($iconBlock) | Out-Null
 $titleStack.Children.Add($titleTextStack) | Out-Null
 $headerGrid.Children.Add($titleStack) | Out-Null
 
-# Actions Right
+# Actions Right (Only Language toggle + Window controls)
 $headerActions = [System.Windows.Controls.StackPanel]::new()
 $headerActions.Orientation = "Horizontal"
 $headerActions.HorizontalAlignment = "Right"
 $headerActions.VerticalAlignment = "Center"
 $headerActions.Margin = [System.Windows.Thickness]::new(0, 0, 15, 0)
 
-# Social Links
-function Add-HeaderLink($iconName, $url, $tooltip) {
-    $btn = [System.Windows.Controls.Border]::new()
-    $btn.Width = 28; $btn.Height = 28; $btn.CornerRadius = 6; $btn.Margin = [System.Windows.Thickness]::new(3)
-    $btn.Background = [System.Windows.Media.Brushes]::Transparent; $btn.Cursor = [System.Windows.Input.Cursors]::Hand
-    $btn.ToolTip = $tooltip
-    
-    $imgPath = Join-Path $workDir $iconName
-    if (Test-Path $imgPath) {
-        $img = [System.Windows.Controls.Image]::new()
-        $bmp = [System.Windows.Media.Imaging.BitmapImage]::new([Uri]$imgPath)
-        $img.Source = $bmp; $img.Width = 16; $img.Height = 16; $img.Opacity = 0.75
-        $btn.Child = $img
-    }
-    $btn.Add_MouseEnter({ $this.Background = $cardHoverBrush; if ($this.Child) { $this.Child.Opacity = 1 } })
-    $btn.Add_MouseLeave({ $this.Background = [System.Windows.Media.Brushes]::Transparent; if ($this.Child) { $this.Child.Opacity = 0.75 } })
-    $btn.Add_MouseDown({ Start-Process $url }.GetNewClosure())
-    return $btn
-}
-
-$headerActions.Children.Add((Add-HeaderLink "Telegram.ico" "https://t.me/SysTweakX" "Telegram Community")) | Out-Null
-$headerActions.Children.Add((Add-HeaderLink "GitHub.ico" "https://github.com/dimazzq92/SysTweakX" "GitHub Repository")) | Out-Null
-$headerActions.Children.Add((Add-HeaderLink "YouTube.ico" "https://youtube.com/@dimazzq" "YouTube Channel")) | Out-Null
-
 # Language Toggle
 $btnLang = [System.Windows.Controls.Border]::new()
-$btnLang.Width = 36; $btnLang.Height = 26; $btnLang.CornerRadius = 6; $btnLang.Margin = [System.Windows.Thickness]::new(8, 0, 12, 0)
+$btnLang.Width = 38; $btnLang.Height = 28; $btnLang.CornerRadius = 6; $btnLang.Margin = [System.Windows.Thickness]::new(0, 0, 14, 0)
 $btnLang.Background = $cardBgBrush; $btnLang.BorderThickness = 1; $btnLang.BorderBrush = $borderBrush
 $btnLang.Cursor = [System.Windows.Input.Cursors]::Hand
 
@@ -618,9 +609,9 @@ $btnLang.Add_MouseDown({
 })
 $headerActions.Children.Add($btnLang) | Out-Null
 
-# Window Controls
+# Window Controls (Min / Close)
 $btnMin = [System.Windows.Controls.Border]::new()
-$btnMin.Width = 30; $btnMin.Height = 28; $btnMin.CornerRadius = 6; $btnMin.Background = [System.Windows.Media.Brushes]::Transparent
+$btnMin.Width = 30; $btnMin.Height = 28; $btnMin.CornerRadius = 6; $btnMin.Background = [System.Windows.Media.Brushes]::Transparent; $btnMin.Margin = [System.Windows.Thickness]::new(2,0,2,0)
 $btnMin.Cursor = [System.Windows.Input.Cursors]::Hand
 $txtMin = [System.Windows.Controls.TextBlock]::new(); $txtMin.Text = "─"; $txtMin.Foreground = $textSecondary
 $txtMin.HorizontalAlignment = "Center"; $txtMin.VerticalAlignment = "Center"; $txtMin.FontSize = 11
@@ -631,7 +622,7 @@ $btnMin.Add_MouseDown({ $window.WindowState = "Minimized" })
 $headerActions.Children.Add($btnMin) | Out-Null
 
 $btnClose = [System.Windows.Controls.Border]::new()
-$btnClose.Width = 30; $btnClose.Height = 28; $btnClose.CornerRadius = 6; $btnClose.Background = [System.Windows.Media.Brushes]::Transparent
+$btnClose.Width = 30; $btnClose.Height = 28; $btnClose.CornerRadius = 6; $btnClose.Background = [System.Windows.Media.Brushes]::Transparent; $btnClose.Margin = [System.Windows.Thickness]::new(2,0,0,0)
 $btnClose.Cursor = [System.Windows.Input.Cursors]::Hand
 $txtClose = [System.Windows.Controls.TextBlock]::new(); $txtClose.Text = "✕"; $txtClose.Foreground = $textSecondary
 $txtClose.HorizontalAlignment = "Center"; $txtClose.VerticalAlignment = "Center"; $txtClose.FontSize = 11
@@ -647,7 +638,7 @@ $mainGrid.Children.Add($headerGrid) | Out-Null
 
 # ----------------- 2. BODY (SIDEBAR + CONTENT) -----------------
 $bodyGrid = [System.Windows.Controls.Grid]::new()
-$colSidebar = [System.Windows.Controls.ColumnDefinition]::new(); $colSidebar.Width = [System.Windows.GridLength]::new(210, [System.Windows.GridUnitType]::Pixel)
+$colSidebar = [System.Windows.Controls.ColumnDefinition]::new(); $colSidebar.Width = [System.Windows.GridLength]::new(235, [System.Windows.GridUnitType]::Pixel)
 $colMain    = [System.Windows.Controls.ColumnDefinition]::new(); $colMain.Width = [System.Windows.GridLength]::new(1, [System.Windows.GridUnitType]::Star)
 $bodyGrid.ColumnDefinitions.Add($colSidebar)
 $bodyGrid.ColumnDefinitions.Add($colMain)
@@ -659,14 +650,14 @@ $sidebar.BorderThickness = [System.Windows.Thickness]::new(0, 0, 1, 0)
 $sidebar.BorderBrush = $borderBrush
 
 $sidebarStack = [System.Windows.Controls.StackPanel]::new()
-$sidebarStack.Margin = [System.Windows.Thickness]::new(10, 15, 10, 15)
+$sidebarStack.Margin = [System.Windows.Thickness]::new(10, 14, 10, 14)
 
 $global:activeCategory = "Cat_All"
 $sidebarButtons = [System.Collections.Generic.List[System.Windows.Controls.Border]]::new()
 
-function Create-SidebarBtn([string]$catKey, [string]$icon, [string]$labelKey) {
+function Create-SidebarBtn([string]$catKey, [string]$icon, [string]$iconColorHex, [string]$labelKey) {
     $btn = [System.Windows.Controls.Border]::new()
-    $btn.Height = 38; $btn.CornerRadius = 8; $btn.Margin = [System.Windows.Thickness]::new(0, 0, 0, 4)
+    $btn.Height = 40; $btn.CornerRadius = 8; $btn.Margin = [System.Windows.Thickness]::new(0, 0, 0, 4)
     $btn.Cursor = [System.Windows.Input.Cursors]::Hand
     $btn.Tag = $catKey
     $btn.Background = if ($catKey -eq "Cat_All") { $accentBrush } else { [System.Windows.Media.Brushes]::Transparent }
@@ -674,13 +665,18 @@ function Create-SidebarBtn([string]$catKey, [string]$icon, [string]$labelKey) {
     $sp = [System.Windows.Controls.StackPanel]::new()
     $sp.Orientation = "Horizontal"; $sp.VerticalAlignment = "Center"; $sp.Margin = [System.Windows.Thickness]::new(12, 0, 8, 0)
 
+    # Colorful Icon Block
     $ico = [System.Windows.Controls.TextBlock]::new()
-    $ico.Text = $icon; $ico.FontSize = 14; $ico.VerticalAlignment = "Center"; $ico.Margin = [System.Windows.Thickness]::new(0, 0, 10, 0)
+    $ico.Text = $icon
+    $ico.FontSize = 15
+    $ico.Foreground = Get-Brush $iconColorHex
+    $ico.VerticalAlignment = "Center"
+    $ico.Margin = [System.Windows.Thickness]::new(0, 0, 10, 0)
 
     $lbl = [System.Windows.Controls.TextBlock]::new()
     Register-Loc $lbl $labelKey "Text"
     $lbl.Foreground = if ($catKey -eq "Cat_All") { [System.Windows.Media.Brushes]::White } else { $textSecondary }
-    $lbl.FontSize = 12; $lbl.FontWeight = [System.Windows.FontWeights]::SemiBold
+    $lbl.FontSize = 12.5; $lbl.FontWeight = [System.Windows.FontWeights]::SemiBold
     $lbl.VerticalAlignment = "Center"
 
     $sp.Children.Add($ico) | Out-Null
@@ -717,9 +713,10 @@ function Create-SidebarBtn([string]$catKey, [string]$icon, [string]$labelKey) {
     return $btn
 }
 
-$sidebarStack.Children.Add((Create-SidebarBtn "Cat_All" "📋" "Cat_All")) | Out-Null
+# Add colorful sidebar items
+$sidebarStack.Children.Add((Create-SidebarBtn "Cat_All" "📋" "#60A5FA" "Cat_All")) | Out-Null
 foreach ($cat in $categories) {
-    $sidebarStack.Children.Add((Create-SidebarBtn $cat.Key $cat.Icon $cat.Key)) | Out-Null
+    $sidebarStack.Children.Add((Create-SidebarBtn $cat.Key $cat.Icon $cat.IconColor $cat.Key)) | Out-Null
 }
 
 $sidebar.Child = $sidebarStack
@@ -730,36 +727,38 @@ $bodyGrid.Children.Add($sidebar) | Out-Null
 $contentGrid = [System.Windows.Controls.Grid]::new()
 $contentGrid.Margin = [System.Windows.Thickness]::new(16, 12, 16, 10)
 
-$rowTools = [System.Windows.Controls.RowDefinition]::new(); $rowTools.Height = [System.Windows.GridLength]::new(46, [System.Windows.GridUnitType]::Pixel)
+$rowTools = [System.Windows.Controls.RowDefinition]::new(); $rowTools.Height = [System.Windows.GridLength]::new(44, [System.Windows.GridUnitType]::Pixel)
 $rowCards = [System.Windows.Controls.RowDefinition]::new(); $rowCards.Height = [System.Windows.GridLength]::new(1, [System.Windows.GridUnitType]::Star)
 $contentGrid.RowDefinitions.Add($rowTools)
 $contentGrid.RowDefinitions.Add($rowCards)
 
-# Search & Presets Toolbar
+# --- SEARCH & PRESETS TOOLBAR ---
 $toolbarGrid = [System.Windows.Controls.Grid]::new()
-$colSearch = [System.Windows.Controls.ColumnDefinition]::new(); $colSearch.Width = [System.Windows.GridLength]::new(200, [System.Windows.GridUnitType]::Pixel)
+$colSearch = [System.Windows.Controls.ColumnDefinition]::new(); $colSearch.Width = [System.Windows.GridLength]::new(170, [System.Windows.GridUnitType]::Pixel)
 $colPresets = [System.Windows.Controls.ColumnDefinition]::new(); $colPresets.Width = [System.Windows.GridLength]::new(1, [System.Windows.GridUnitType]::Star)
 $toolbarGrid.ColumnDefinitions.Add($colSearch)
 $toolbarGrid.ColumnDefinitions.Add($colPresets)
 
-# Search Box
+# Search Box with Watermark Placeholder
 $searchBorder = [System.Windows.Controls.Border]::new()
 $searchBorder.Background = $cardBgBrush; $searchBorder.CornerRadius = 8; $searchBorder.BorderThickness = 1; $searchBorder.BorderBrush = $borderBrush
-$searchBorder.Height = 34; $searchBorder.Margin = [System.Windows.Thickness]::new(0, 0, 10, 0)
+$searchBorder.Height = 32; $searchBorder.Margin = [System.Windows.Thickness]::new(0, 0, 8, 0)
+
+$searchGrid = [System.Windows.Controls.Grid]::new()
 
 $searchStack = [System.Windows.Controls.StackPanel]::new(); $searchStack.Orientation = "Horizontal"; $searchStack.VerticalAlignment = "Center"
-$searchIcon = [System.Windows.Controls.TextBlock]::new(); $searchIcon.Text = "🔍"; $searchIcon.FontSize = 11; $searchIcon.Margin = [System.Windows.Thickness]::new(8, 0, 6, 0); $searchIcon.Foreground = $textMuted
+$searchIcon = [System.Windows.Controls.TextBlock]::new(); $searchIcon.Text = "🔍"; $searchIcon.FontSize = 11; $searchIcon.Margin = [System.Windows.Thickness]::new(8, 0, 4, 0); $searchIcon.Foreground = $textMuted
 
 $searchBox = [System.Windows.Controls.TextBox]::new()
 $searchBox.Background = [System.Windows.Media.Brushes]::Transparent; $searchBox.BorderThickness = 0
-$searchBox.Foreground = $textPrimary; $searchBox.FontSize = 12; $searchBox.Width = 160
+$searchBox.Foreground = $textPrimary; $searchBox.FontSize = 12; $searchBox.Width = 135
 $searchBox.VerticalAlignment = "Center"
-
-$searchBox.Add_TextChanged({ Filter-Tweaks })
 
 $searchStack.Children.Add($searchIcon) | Out-Null
 $searchStack.Children.Add($searchBox) | Out-Null
-$searchBorder.Child = $searchStack
+$searchGrid.Children.Add($searchStack) | Out-Null
+
+$searchBorder.Child = $searchGrid
 [System.Windows.Controls.Grid]::SetColumn($searchBorder, 0)
 $toolbarGrid.Children.Add($searchBorder) | Out-Null
 
@@ -770,14 +769,14 @@ $presetsPanel.HorizontalAlignment = "Right"
 
 function Create-PresetBtn([string]$presetKey, [string]$locKey, [string]$tooltip) {
     $btn = [System.Windows.Controls.Border]::new()
-    $btn.Height = 32; $btn.CornerRadius = 7; $btn.Margin = [System.Windows.Thickness]::new(3, 0, 3, 0)
+    $btn.Height = 32; $btn.CornerRadius = 7; $btn.Margin = [System.Windows.Thickness]::new(2, 0, 2, 0)
     $btn.Background = $cardBgBrush; $btn.BorderThickness = 1; $btn.BorderBrush = $borderBrush
     $btn.Cursor = [System.Windows.Input.Cursors]::Hand; $btn.ToolTip = $tooltip
 
     $lbl = [System.Windows.Controls.TextBlock]::new()
     Register-Loc $lbl $locKey "Text"
     $lbl.Foreground = $textSecondary; $lbl.FontSize = 11; $lbl.FontWeight = [System.Windows.FontWeights]::SemiBold
-    $lbl.Margin = [System.Windows.Thickness]::new(10, 0, 10, 0); $lbl.VerticalAlignment = "Center"
+    $lbl.Margin = [System.Windows.Thickness]::new(9, 0, 9, 0); $lbl.VerticalAlignment = "Center"
     $btn.Child = $lbl
 
     $btn.Add_MouseEnter({ $this.Background = $cardHoverBrush; $this.Child.Foreground = $textPrimary })
@@ -789,12 +788,12 @@ function Create-PresetBtn([string]$presetKey, [string]$locKey, [string]$tooltip)
     return $btn
 }
 
-$presetsPanel.Children.Add((Create-PresetBtn "rec"     "Preset_Rec"     "Recommended for all users")) | Out-Null
-$presetsPanel.Children.Add((Create-PresetBtn "game"    "Preset_Game"    "Maximum FPS and low latency")) | Out-Null
-$presetsPanel.Children.Add((Create-PresetBtn "privacy" "Preset_Privacy" "Anti-telemetry & anti-spy")) | Out-Null
-$presetsPanel.Children.Add((Create-PresetBtn "clean"   "Preset_Clean"   "Deep storage & junk clean")) | Out-Null
-$presetsPanel.Children.Add((Create-PresetBtn "all"     "Preset_All"     "Select all tweaks")) | Out-Null
-$presetsPanel.Children.Add((Create-PresetBtn "none"    "Preset_None"    "Deselect all tweaks")) | Out-Null
+$presetsPanel.Children.Add((Create-PresetBtn "rec"     "Preset_Rec"     "Recommended optimal tweaks")) | Out-Null
+$presetsPanel.Children.Add((Create-PresetBtn "game"    "Preset_Game"    "Maximum FPS & lowest latency")) | Out-Null
+$presetsPanel.Children.Add((Create-PresetBtn "privacy" "Preset_Privacy" "Anti-telemetry & AI disable")) | Out-Null
+$presetsPanel.Children.Add((Create-PresetBtn "clean"   "Preset_Clean"   "Deep junk & storage clean")) | Out-Null
+$presetsPanel.Children.Add((Create-PresetBtn "all"     "Preset_All"     "Select all")) | Out-Null
+$presetsPanel.Children.Add((Create-PresetBtn "none"    "Preset_None"    "Deselect all")) | Out-Null
 
 [System.Windows.Controls.Grid]::SetColumn($presetsPanel, 1)
 $toolbarGrid.Children.Add($presetsPanel) | Out-Null
@@ -802,16 +801,24 @@ $toolbarGrid.Children.Add($presetsPanel) | Out-Null
 [System.Windows.Controls.Grid]::SetRow($toolbarGrid, 0)
 $contentGrid.Children.Add($toolbarGrid) | Out-Null
 
-# --- TWEAKS SCROLL AREA (2-COLUMN CARDS) ---
+# --- TWEAKS SCROLL AREA (2-COLUMN GRID TO ELIMINATE GAPS) ---
 $scrollViewer = [System.Windows.Controls.ScrollViewer]::new()
 $scrollViewer.VerticalScrollBarVisibility = "Auto"
 $scrollViewer.HorizontalScrollBarVisibility = "Disabled"
-$scrollViewer.Margin = [System.Windows.Thickness]::new(0, 6, 0, 0)
+$scrollViewer.Margin = [System.Windows.Thickness]::new(0, 4, 0, 0)
 
-$cardsWrap = [System.Windows.Controls.WrapPanel]::new()
-$cardsWrap.Orientation = "Horizontal"
-$cardsWrap.ItemWidth = 324
-$cardsWrap.Margin = [System.Windows.Thickness]::new(0)
+$twoColGrid = [System.Windows.Controls.Grid]::new()
+$c0 = [System.Windows.Controls.ColumnDefinition]::new(); $c0.Width = [System.Windows.GridLength]::new(1, [System.Windows.GridUnitType]::Star)
+$c1 = [System.Windows.Controls.ColumnDefinition]::new(); $c1.Width = [System.Windows.GridLength]::new(1, [System.Windows.GridUnitType]::Star)
+$twoColGrid.ColumnDefinitions.Add($c0)
+$twoColGrid.ColumnDefinitions.Add($c1)
+
+$col0Stack = [System.Windows.Controls.StackPanel]::new(); $col0Stack.Margin = [System.Windows.Thickness]::new(0, 0, 4, 0)
+$col1Stack = [System.Windows.Controls.StackPanel]::new(); $col1Stack.Margin = [System.Windows.Thickness]::new(4, 0, 0, 0)
+[System.Windows.Controls.Grid]::SetColumn($col0Stack, 0)
+[System.Windows.Controls.Grid]::SetColumn($col1Stack, 1)
+$twoColGrid.Children.Add($col0Stack) | Out-Null
+$twoColGrid.Children.Add($col1Stack) | Out-Null
 
 $global:allTweakCards = [System.Collections.Generic.List[PSObject]]::new()
 
@@ -825,7 +832,7 @@ foreach ($cat in $categories) {
         $card = [System.Windows.Controls.Border]::new()
         $card.Height = 52
         $card.CornerRadius = 8
-        $card.Margin = [System.Windows.Thickness]::new(4)
+        $card.Margin = [System.Windows.Thickness]::new(0, 0, 0, 7)
         $card.Background = $cardBgBrush
         $card.BorderThickness = 1
         $card.BorderBrush = $borderBrush
@@ -889,8 +896,6 @@ foreach ($cat in $categories) {
         $cardGrid.Children.Add($txt) | Out-Null
         $card.Child = $cardGrid
 
-        $cardsWrap.Children.Add($card) | Out-Null
-
         $global:allTweakCards.Add([PSCustomObject]@{
             Card       = $card
             CheckBox   = $cb
@@ -902,7 +907,7 @@ foreach ($cat in $categories) {
     }
 }
 
-$scrollViewer.Content = $cardsWrap
+$scrollViewer.Content = $twoColGrid
 [System.Windows.Controls.Grid]::SetRow($scrollViewer, 1)
 $contentGrid.Children.Add($scrollViewer) | Out-Null
 
@@ -966,9 +971,14 @@ $footerGrid.Children.Add($footerStack) | Out-Null
 [System.Windows.Controls.Grid]::SetRow($footerGrid, 2)
 $mainGrid.Children.Add($footerGrid) | Out-Null
 
-# ================= ФУНКЦИИ ФИЛЬТРАЦИИ И ПРЕСЕТОВ =================
+# ================= ДИНАМИЧЕСКАЯ ФИЛЬТРАЦИЯ (2 КОЛОНКИ БЕЗ ПУСТОТ) =================
 function Filter-Tweaks {
     $search = $searchBox.Text.Trim().ToLower()
+    $col0Stack.Children.Clear()
+    $col1Stack.Children.Clear()
+
+    $visibleCards = [System.Collections.Generic.List[PSObject]]::new()
+
     foreach ($item in $global:allTweakCards) {
         $matchCat = ($global:activeCategory -eq "Cat_All") -or ($item.Category -eq $global:activeCategory)
         $textLocRU = $loc["RU"][$item.LocKey].ToLower()
@@ -976,12 +986,22 @@ function Filter-Tweaks {
         $matchSearch = [string]::IsNullOrEmpty($search) -or ($textLocRU -like "*$search*") -or ($textLocEN -like "*$search*") -or ($item.Tag.ToLower() -like "*$search*")
 
         if ($matchCat -and $matchSearch) {
-            $item.Card.Visibility = "Visible"
+            $visibleCards.Add($item)
+        }
+    }
+
+    # Alternate cards evenly between Column 0 and Column 1 starting from row 0
+    for ($i = 0; $i -lt $visibleCards.Count; $i++) {
+        $cardObj = $visibleCards[$i]
+        if ($i % 2 -eq 0) {
+            $col0Stack.Children.Add($cardObj.Card) | Out-Null
         } else {
-            $item.Card.Visibility = "Collapsed"
+            $col1Stack.Children.Add($cardObj.Card) | Out-Null
         }
     }
 }
+
+$searchBox.Add_TextChanged({ Filter-Tweaks })
 
 function Apply-Preset([string]$preset) {
     # Сжатие взаимоисключающее
@@ -1013,10 +1033,13 @@ function Update-SummaryCount {
     $btnOptimize.IsHitTestVisible = ($checked -gt 0)
 }
 
-# ================= ЗАПУСК =================
+# ================= ИНИЦИАЛИЗАЦИЯ =================
 $mainBorder.Child = $mainGrid
 $window.Content = $mainBorder
 Set-FadeIn $window
+
+# Initial populate of 2-column grid and count
+Filter-Tweaks
 Update-SummaryCount
 
 $window.ShowDialog() | Out-Null
