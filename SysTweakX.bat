@@ -25,7 +25,86 @@
         exit
     )
     set "arg=%~1"
-    if /i "%arg%"=="/RemoveUpdateFiles" call :RemoveOverlay & call :RemoveUpdateFiles
+    if /i "%arg%"=="/RemoveUpdateFiles" call 
+:DisableRecall
+REM Отключение Windows 11 AI Recall
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows AI" /v "DisableAIDataAnalysis" /t REG_DWORD /d 1 /f >nul 2>&1
+    dism /online /disable-feature /featurename:Recall /norestart >nul 2>&1
+    exit /b
+
+:DisableCopilot
+REM Отключение Windows Copilot и аппаратной клавиши
+    reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "CopilotHardwareKey" /t REG_DWORD /d 0 /f >nul 2>&1
+    exit /b
+
+:DisableBingSearch
+REM Отключение поиска Bing и веб-результатов в меню Пуск
+    reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d 0 /f >nul 2>&1
+    exit /b
+
+:DisableSpotlight
+REM Отключение Windows Spotlight и рекомендаций
+    reg add "HKCU\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsSpotlightFeatures" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsSpotlightFeatures" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKCU\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d 0 /f >nul 2>&1
+    exit /b
+
+:DisableAdId
+REM Отключение Advertising ID
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d 1 /f >nul 2>&1
+    exit /b
+
+:DisableActivityHistory
+REM Отключение истории активности
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableActivityFeed" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /t REG_DWORD /d 0 /f >nul 2>&1
+    exit /b
+
+:EnableHAGS
+REM Включение аппаратного планирования GPU (HAGS)
+    reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d 2 /f >nul 2>&1
+    exit /b
+
+:DisableNetThrottling
+REM Отключение троттлинга сети для онлайн игр
+    reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d 4294967295 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d 6 /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d "High" /f >nul 2>&1
+    reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "SFIO Priority" /t REG_SZ /d "High" /f >nul 2>&1
+    exit /b
+
+:DisableDeliveryOpt
+REM Отключение P2P доставки обновлений
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d 0 /f >nul 2>&1
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization" /v "SystemSettingsDownloadMode" /t REG_DWORD /d 0 /f >nul 2>&1
+    sc config DoSvc start= disabled >nul 2>&1
+    net stop DoSvc >nul 2>&1
+    exit /b
+
+:PrivacyAIOverlay
+    if "!LANG!"=="EN" ( start /b "" Helper /Overlay "Disabling AI & Telemetry" /Font "Bahnschrift" /Size "40" ) else ( start /b "" Helper /Overlay "Отключение AI и телеметрии" /Font "Bahnschrift" /Size "40" )
+    timeout /t 1 /nobreak >nul 2>&1
+    exit /b
+
+:RemoveOverlay & call :RemoveUpdateFiles
     if /i "%arg%"=="/RemoveStoreCache" call :RemoveOverlay & call :RemoveStoreCache
     if /i "%arg%"=="/RemoveExplorerCache" call :RemoveOverlay & call :RemoveExplorerCache
     if /i "%arg%"=="/CleanWinSxS" call :RemoveOverlay & call :CleanWinSxS
@@ -75,6 +154,15 @@
     if /i "%arg%"=="/DisableNotificationsAds" call :TweaksOverlay & call :DisableNotificationsAds
     if /i "%arg%"=="/DNS" call :TweaksOverlay & call :DNS
     if /i "%arg%"=="/BlockTelemetry" call :TweaksOverlay & call :BlockTelemetry
+    if /i "%arg%"=="/DisableRecall" call :PrivacyAIOverlay & call :DisableRecall
+    if /i "%arg%"=="/DisableCopilot" call :PrivacyAIOverlay & call :DisableCopilot
+    if /i "%arg%"=="/DisableBingSearch" call :PrivacyAIOverlay & call :DisableBingSearch
+    if /i "%arg%"=="/DisableSpotlight" call :PrivacyAIOverlay & call :DisableSpotlight
+    if /i "%arg%"=="/DisableAdId" call :PrivacyAIOverlay & call :DisableAdId
+    if /i "%arg%"=="/DisableActivityHistory" call :PrivacyAIOverlay & call :DisableActivityHistory
+    if /i "%arg%"=="/EnableHAGS" call :OptimizationOverlay & call :EnableHAGS
+    if /i "%arg%"=="/DisableNetThrottling" call :OptimizationOverlay & call :DisableNetThrottling
+    if /i "%arg%"=="/DisableDeliveryOpt" call :OptimizationOverlay & call :DisableDeliveryOpt
     
     if /i "%arg%"=="/InstallDrivers" call :DriversOverlay & call :InstallDrivers
     

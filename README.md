@@ -5,22 +5,26 @@
 <a name="русский"></a>
 <div align="center">
 
-# SysTweakX
-**Мощная настройка и оптимизация Windows 11 в пару кликов!**
+# SysTweakX v3.0 Pro
+### 🚀 Ультимативная оптимизация и настройка Windows 11 (25H2 Edition)
 
 <table style="border: none; margin: 0 auto;">
   <tr>
-    <td align="center" width="50%"><b>🚀 Скачивания</b></td>
-    <td align="center" width="50%"><b>🛡️ Статус</b></td>
+    <td align="center" width="33%"><b>📦 Релиз</b></td>
+    <td align="center" width="33%"><b>🛡️ Версия</b></td>
+    <td align="center" width="33%"><b>💻 Поддержка</b></td>
   </tr>
   <tr>
     <td align="center">
       <a href="https://github.com/dimazzq92/SysTweakX/releases/download/Release/SysTweakX.exe">
-        <img src="https://img.shields.io/github/downloads/dimazzq92/SysTweakX/Release/total?style=for-the-badge&label=SysTweakX&color=0078D4&logo=windows">
+        <img src="https://img.shields.io/github/downloads/dimazzq92/SysTweakX/Release/total?style=for-the-badge&label=SysTweakX.exe&color=0078D4&logo=windows">
       </a>
     </td>
     <td align="center">
-      <img src="https://img.shields.io/badge/Версия-2.1%20Pro-4B5563?style=for-the-badge">
+      <img src="https://img.shields.io/badge/Версия-3.0%20Pro-0078D4?style=for-the-badge">
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/Windows%2011-23H2%20|%2024H2%20|%2025H2-107C41?style=for-the-badge&logo=windows11">
     </td>
   </tr>
 </table>
@@ -30,229 +34,147 @@
 ---
 
 > [!CAUTION]
-> **Программа создана для глубокой оптимизации системы.**  
-> При запуске на рабочей / настроенной ОС ответственность за возможные проблемы ложится исключительно на вас. Настоятельно рекомендуется использовать на свежеустановленной Windows.
-
-> [!WARNING]
-> Рекомендуется использовать **Windows 11 Pro (25H2+)**. Подключение к интернету должно отсутствовать для беспроблемного удаления встроенных компонентов телеметрии и Защитника Windows.
+> **SysTweakX предназначен для глубокой и бескомпромиссной оптимизации системы.**  
+> При запуске на уже настроенной рабочей системе ответственность за изменения ложится на пользователя. Рекомендуется применять на чистой системе сразу после установки Windows 11.
 
 > [!TIP]
-> **Идеальный флоу работы:** Установили Windows 11 без интернета ➔ Настроили и запустили SysTweakX ➔ Подождали ➔ Получили чистую систему с классическим интерфейсом и отсутствием слежки.
+> **Идеальный порядок настройки:**  
+> Установили Windows 11 ➔ Отключили интернет ➔ Запустили **SysTweakX** ➔ Выбрали пресет (например, ⭐ **Рекомендуемый** или 🎮 **Игровой**) ➔ Нажали **ОПТИМИЗИРОВАТЬ** ➔ Перезагрузили ПК и получили чистую, отзывчивую ОС без слежки и мусора.
 
 ---
 
-<h2 align="center">📋 Возможности и функционал</h2>
+## 🌟 Что нового в версии 3.0 Pro?
 
-<details>
-<summary><b>✨ [НОВОЕ] Продвинутые визуальные твики</b></summary>
-<br>
-
-- **Классическое контекстное меню (Win10):** Возвращает привычное контекстное меню по правому клику без "Показать дополнительные параметры".
-- **Панель задач по левому краю:** Привычное расположение меню Пуск для классического опыта.
-- **Интерфейс:** Тёмная тема, синие папки. Отключение тени значков и экрана блокировки.
-- **Треи и Панель задач:** Секунды и дата в трее, пункт "Завершить задачу", удаление лишних значков (Поиск, Виджеты).
-</details>
-
-<details>
-<summary><b>🛡️ [НОВОЕ] Приватность и анти-телеметрия</b></summary>
-<br>
-
-- **Блокировка телеметрии (hosts):** Запрещает Windows отправлять диагностические данные на серверы `vortex.data.microsoft.com` и `telemetry.microsoft.com`.
-- **Скрыть реальный TTL:** Незаменимо при раздаче интернета со смартфона на ПК.
-- Установить DNS Cloudflare (1.1.1.1) на Wi-Fi адаптеры.
-</details>
-
-<details>
-<summary><b>🗑️ Глубокая очистка системы</b></summary>
-<br>
-
-- **Удалить файлы обновлений:** Очищает загруженные обновления Windows.
-- **Удалить кэш Microsoft Store:** Помогает при ошибках скачивания приложений из магазина.
-- **Очистить хранилище WinSxS:** Удаляет устаревшие и замененные версии компонентов ОС.
-- **Удалить лишние папки на диске С:** Убирает `Windows.old`, `PerfLogs` и `inetpub`.
-- **Удалить все UWP-приложения:** Очищает всё лишнее.
-- **Удалить OneDrive и Edge.**
-</details>
-
-<details>
-<summary><b>⚙️ Оптимизация параметров</b></summary>
-<br>
-
-- Отключить Гибернацию и Зарезервированное хранилище
-- Отключить Точки восстановления
-- Отложенный запуск автоматических служб и Минимизация системных отчетов
-- Ускорить открытие папок
-- **Отключить VBS и HVCI** (Заметно повышает производительность процессоров AMD)
-- Установить схему питания "Максимальная производительность"
-- Отключить Game DVR и функцию "Возобновить" (Освобождает ОЗУ)
-</details>
-
-<details>
-<summary><b>🔄 Центр обновления Windows</b></summary>
-<br>
-
-- Запретить автоматические обновления и установку драйверов из ЦО.
-- Запретить обновления утилиты удаления вредоносных программ.
-- Установить паузу обновлений до 07.07.2077.
-</details>
-
-<details>
-<summary><b>🛠️ Системные твики</b></summary>
-<br>
-
-- **Отключить UAC:** Отключение контроля учетных записей.
-- **Сделать учетную запись Административной:** Все программы запускаются с правами админа по умолчанию.
-- **Принудительно завершать программы при зависании.**
-</details>
-
-<details>
-<summary><b>📥 Установка компонентов</b></summary>
-<br>
-
-- **Установить драйверы:** Устанавливает драйверы из папки `Drivers` на Рабочем столе (если папки нет — пропускается).
-- **Установить Visual C++ 2005-2022** и **DirectX 9-11**.
-</details>
-
-<details>
-<summary><b>💿 Сжатие системы</b></summary>
-<br>
-
-- Максимальное сжатие системных файлов
-- Максимальное сжатие системных и программных файлов
-  > [!WARNING]
-  > На системах с медленными дисками или слабым процессором этот процесс может занять значительное время!
-</details>
+* 🎨 **Кардинально новый интерфейс (Dashboard)**:
+  * Переход от узкого вертикального окна к широкому, удобному двухколоночному интерфейсу.
+  * Удобное боковое меню по категориям + мгновенный живой поиск по названию твика на русском и английском.
+  * **Система готовых пресетов в один клик**:
+    * `⭐ Рекомендуемый` — сбалансированная оптимизация для повседневной работы и игр.
+    * `🎮 Игровой` — максимальный FPS, минимальный инпутлаг и низкий пинг.
+    * `🔒 Приватность` — полное отключение слежки, AI-снапшотов и телеметрии.
+    * `🧹 Очистка` — глубокая очистка хранилища WinSxS, кэшей и временных файлов.
+* 🤖 **Специальные твики для Windows 11 25H2**:
+  * Полное отключение **Windows Recall** (снимки экрана AI и семантическая индексация).
+  * Отключение **Windows Copilot** и перехвата аппаратной клавиши Copilot.
+  * Отключение поиска Bing и веб-результатов прямо в меню Пуск.
+  * Отключение Windows Spotlight, рекламного ID и персонализированных промо-акций.
+* ⚡ **Гейминг и аппаратное ускорение**:
+  * Включение **Hardware-Accelerated GPU Scheduling (HAGS)**.
+  * Отключение **Network Throttling Index** для минимальной сетевой задержки.
+  * Отключение **VBS и HVCI** для максимальной производительности процессора.
 
 ---
-<div align="center">
-<b>Создано для безупречной работы. Приятного пользования SysTweakX! 🚀</b>
-</div>
 
+## 📋 Подробный список возможностей
+
+<details>
+<summary><b>🛡️ Приватность, AI и анти-телеметрия (25H2)</b></summary>
+<br>
+
+- **Отключить Windows Recall:** Блокирует фоновый сбор снимков экрана и семантический AI-анализ активности.
+- **Отключить Windows Copilot:** Полное отключение ассистента и кнопки в интерфейсе / на клавиатуре.
+- **Отключить поиск Bing в Пуске:** Оставляет только локальный мгновенный поиск по файлам и приложениям.
+- **Отключить Windows Spotlight:** Убирает рекламные промо-материалы и динамические обои с подсказками.
+- **Блокировка телеметрии (hosts):** Запрещает отправку диагностических данных на сервера `vortex.data.microsoft.com` и `telemetry.microsoft.com`.
+- **Отключить задачи телеметрии:** Деактивирует сбор данных в Планировщике задач Windows.
+- **Отключить Advertising ID:** Запрещает приложениям использовать рекламный идентификатор для трекинга.
+- **Отключить журнал действий:** Отключает Timeline и сохранение истории запуска программ.
+- **Скрыть реальный TTL:** Позволяет обходить ограничения операторов при раздаче интернета с телефона.
+- **DNS Cloudflare (1.1.1.1):** Быстрый и безопасный резолвинг для Wi-Fi адаптеров.
+</details>
+
+<details>
+<summary><b>⚡ Производительность, игры и память</b></summary>
+<br>
+
+- **Включить HAGS:** Аппаратное планирование видеопамяти графическим процессором.
+- **Отключить GameDVR:** Устраняет микрофризы и задержки записи экрана.
+- **Отключить Network Throttling:** Снижает пинг и джиттер в соревновательных онлайн-играх.
+- **Схема питания «Максимальная производительность»:** Разблокирует скрытый профиль Ultimate Performance.
+- **Отключить VBS и HVCI:** Значительный прирост частоты кадров в процессорах AMD и Intel.
+- **Отключить Гибернацию:** Освобождает размер файла `hiberfil.sys` (равный объему ОЗУ) на диске C:.
+- **Отключить Зарезервированное хранилище:** Возвращает 7+ ГБ заблокированного системного места.
+- **Ускорить открытие папок:** Отключает автоматическое определение типа контента папок.
+- **Увеличить порог разделения SVC:** Оптимизирует запуск системных процессов Windows.
+- **Увеличить кэш иконок:** Предотвращает мерцание и долгую подгрузку значков.
+</details>
+
+<details>
+<summary><b>🎨 Интерфейс, Проводник и Панель задач</b></summary>
+<br>
+
+- **Классическое контекстное меню (Win10):** Возвращает привычное полное меню по правому клику мыши.
+- **Выравнивание Панели задач влево:** Классическое удобное расположение кнопки Пуск.
+- **Тёмная тема системы:** Активирует темную тему для интерфейса и стандартных приложений.
+- **Пункт «Завершить задачу»:** Быстрое закрытие зависших программ прямо из контекстного меню значка на Панели задач.
+- **Удалить лишние значки:** Скрывает иконки Поиска, Виджетов, Task View и Copilot.
+- **Скрыть раздел «Рекомендуем»:** Очищает меню Пуск от недавних файлов и подсказок.
+- **Проводник на «Этот компьютер»:** Открывает диски вместо ленты «Главная».
+- **Показывать расширения и скрытые файлы:** Безопасность и удобство работы с файлами.
+- **Удалить Галерею, Сеть, Главную из боковой панели Проводника.**
+- **Секунды и полная дата в трее:** Информативные системные часы.
+- **Синие папки и кастомные обои SysTweakX.**
+</details>
+
+<details>
+<summary><b>🗑️ Глубокая очистка и удаление предустановленного ПО</b></summary>
+<br>
+
+- **Удалить все UWP-приложения:** Очищает встроенные игры, промо-приложения и бесполезные UWP-пакеты.
+- **Удалить Microsoft OneDrive:** Полное удаление облачного хранилища и очистка реестра.
+- **Удалить браузер Microsoft Edge и WebView2.**
+- **Отключить Защитник Windows (DefenderKiller):** Полное отключение Windows Defender для слабых ПК.
+- **Очистка хранилища WinSxS:** Сжатие и удаление устаревших версий системных файлов.
+- **Очистка кэшей:** Кэш обновлений, Microsoft Store, эскизов и кэша Проводника.
+- **Удаление мусорных папок:** Удаляет `Windows.old`, `PerfLogs` и `inetpub`.
+- **Очистка старых драйверов и истории ShellBags.**
+</details>
+
+<details>
+<summary><b>🔄 Центр обновления и системные службы</b></summary>
+<br>
+
+- **Запретить автоматические обновления:** Полный контроль над установкой апдейтов.
+- **Запретить установку драйверов из ЦО:** Предотвращает перезапись стабильных видеодрайверов.
+- **Пауза обновлений до 07.07.2077.**
+- **Отключить Delivery Optimization:** Запрещает Windows использовать ваш интернет для P2P раздачи апдейтов другим пользователям.
+- **Снять региональные ограничения:** Открывает доступ ко всем функциям Windows 11 независимо от региона.
+- **Отключить UAC и активировать встроенного Администратора.**
+- **Отключить залипание клавиш при 5-кратном Shift.**
+</details>
+
+<details>
+<summary><b>🧰 Драйверы, библиотеки и сжатие</b></summary>
+<br>
+
+- **Visual C++ Redistributable (2005-2022 AIO):** Установка всех необходимых библиотек в один клик.
+- **DirectX 9-11 End-User Runtimes:** Полный комплект библиотек для старых и новых игр.
+- **Установка драйверов:** Автоматическая установка из папки `Drivers` на Рабочем столе.
+- **Сжатие CompactOS:** Максимальное LZX-сжатие системных файлов без потери производительности.
+</details>
 
 ---
 
 <a name="english"></a>
 <div align="center">
 
-# SysTweakX
-**Powerful setup and optimization of Windows 11 in a few clicks!**
-
-<table style="border: none; margin: 0 auto;">
-  <tr>
-    <td align="center" width="50%"><b>🚀 Downloads</b></td>
-    <td align="center" width="50%"><b>🛡️ Status</b></td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/dimazzq92/SysTweakX/releases/download/Release/SysTweakX.exe">
-        <img src="https://img.shields.io/github/downloads/dimazzq92/SysTweakX/Release/total?style=for-the-badge&label=SysTweakX&color=0078D4&logo=windows">
-      </a>
-    </td>
-    <td align="center">
-      <img src="https://img.shields.io/badge/Version-2.1%20Pro-4B5563?style=for-the-badge">
-    </td>
-  </tr>
-</table>
+# SysTweakX v3.0 Pro (English)
+### 🚀 Ultimate Optimization and Tweaking Utility for Windows 11 (25H2 Edition)
 
 </div>
 
----
-
-> [!CAUTION]
-> **This program is designed for deep system optimization.**  
-> If run on a working/configured OS, you take full responsibility for any possible issues. It is highly recommended to use this on a fresh Windows installation.
-
-> [!WARNING]
-> Recommended OS: **Windows 11 Pro (25H2+)**. Internet connection should be disabled to seamlessly remove built-in telemetry components and Windows Defender.
-
-> [!TIP]
-> **Ideal Workflow:** Install Windows 11 without Internet ➔ Configure and run SysTweakX ➔ Wait ➔ Enjoy a clean system with classic interface and no telemetry.
+### ✨ Key Features:
+- **Brand New Dashboard UI**: Fluid 2-column card grid, categories sidebar, instant live search (RU/EN), and one-click smart presets (*Recommended, Gaming, Privacy, Deep Clean*).
+- **Windows 11 25H2 Specific Tweaks**: Complete disablement of Windows Recall AI snapshots, Copilot key, Bing search in Start, Spotlight suggestions, and 25H2 telemetry.
+- **Gaming & Latency Optimizations**: HAGS GPU scheduling, Network Throttling disablement, Ultimate Performance power plan, VBS/HVCI disablement.
+- **System Debloat & Deep Clean**: Safe removal of OneDrive, Edge, preinstalled UWP apps, WinSxS cleanup, old driver store purge.
+- **UI Customization**: Classic Win10 context menu, left-aligned Taskbar, 'End Task' right-click option, dark theme, hidden recommendation feeds.
 
 ---
 
-<h2 align="center">📋 Features and Capabilities</h2>
-
-<details>
-<summary><b>✨ [NEW] Advanced Visual Tweaks</b></summary>
-<br>
-
-- **Classic Context Menu (Win10):** Restores the familiar right-click context menu without "Show more options".
-- **Left-Aligned Taskbar:** Familiar Start Menu placement for a classic experience.
-- **Interface:** Dark theme, blue folders. Disabled icon drop shadows and lock screen.
-- **Tray and Taskbar:** Seconds and date in the system tray, "End task" option, removal of unnecessary icons (Search, Widgets).
-</details>
-
-<details>
-<summary><b>🛡️ [NEW] Privacy and Anti-Telemetry</b></summary>
-<br>
-
-- **Block Telemetry (hosts):** Prevents Windows from sending diagnostic data to `vortex.data.microsoft.com` and `telemetry.microsoft.com` servers.
-- **Hide Real TTL:** Essential when sharing the Internet from a smartphone to a PC.
-- **Set Cloudflare DNS (1.1.1.1)** on Wi-Fi adapters.
-</details>
-
-<details>
-<summary><b>🗑️ Deep System Cleanup</b></summary>
-<br>
-
-- **Remove Windows Update files:** Clears downloaded Windows updates.
-- **Remove Microsoft Store cache:** Helps with app download errors from the store.
-- **Clean WinSxS Storage:** Removes obsolete and superseded OS component versions.
-- **Remove Junk Folders on C: drive:** Deletes `Windows.old`, `PerfLogs`, and `inetpub`.
-- **Remove all UWP apps:** Cleans up all unnecessary preinstalled applications.
-- **Remove OneDrive and Edge.**
-</details>
-
-<details>
-<summary><b>⚙️ Optimization Parameters</b></summary>
-<br>
-
-- Disable Hibernation and Reserved Storage.
-- Disable System Restore Points.
-- Delayed start for automatic services and minimized system logging.
-- Speed up folder opening.
-- **Disable VBS and HVCI** (Noticeably increases performance on AMD processors).
-- Set "Ultimate Performance" power plan.
-- Disable Game DVR and the "Resume" feature (Frees up RAM).
-</details>
-
-<details>
-<summary><b>🔄 Windows Update</b></summary>
-<br>
-
-- Disable automatic updates and driver installation from Windows Update.
-- Disable Malicious Software Removal Tool updates.
-- Pause updates until 07.07.2077.
-</details>
-
-<details>
-<summary><b>🛠️ System Tweaks</b></summary>
-<br>
-
-- **Disable UAC:** Disables User Account Control.
-- **Enable Built-in Administrator Account:** All programs run with admin rights by default.
-- **Force kill frozen applications.**
-</details>
-
-<details>
-<summary><b>📥 Install Components</b></summary>
-<br>
-
-- **Install Drivers:** Installs drivers from the `Drivers` folder on the Desktop (skipped if the folder does not exist).
-- **Install Visual C++ 2005-2022** and **DirectX 9-11**.
-</details>
-
-<details>
-<summary><b>💿 System Compression</b></summary>
-<br>
-
-- Maximum compression of system files (CompactOS).
-- Maximum compression of system and program files.
-  > [!WARNING]
-  > On systems with slow drives or a weak CPU, this process can take a significant amount of time!
-</details>
-
----
 <div align="center">
-<b>Created for flawless performance. Enjoy using SysTweakX! 🚀</b>
+
+Разработано с ❤️ для пользователей Windows 11.  
+Поддержка и сообщество: [Telegram](https://t.me/SysTweakX) • [GitHub](https://github.com/dimazzq92/SysTweakX) • [YouTube](https://youtube.com/@dimazzq)
+
 </div>
