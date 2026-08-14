@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'README.md'
   workflow_dispatch:
 
 jobs:
@@ -32,13 +30,31 @@ jobs:
           # Create the SFX archive
           & "C:\Program Files\WinRAR\Rar.exe" a -sfx -s -m5 -z"config.txt" SysTweakX.exe GUI.ps1 SysTweakX.bat Work
           
-      - name: Create or Update Release
+      - name: Create or Update v3.0 Release
         uses: softprops/action-gh-release@v2
         with:
           files: SysTweakX.exe
-          tag_name: Release
-          name: SysTweakX Release
-          body: "Автоматическая сборка портативной версии SysTweakX."
+          tag_name: v3.0-Pro
+          name: SysTweakX v3.0 Pro (Windows 11 25H2 Edition)
+          body: |
+            # 🚀 SysTweakX v3.0 Pro (Windows 11 25H2 Edition)
+
+            ### 🌟 Что нового:
+            - **🎨 Новый современный интерфейс (Dashboard)**:
+              - Широкий двухколоночный дашборд с боковым меню категорий.
+              - Мгновенный живой поиск твиков (RU/EN).
+              - Быстрые пресеты в один клик: ⭐ *Рекомендуемый*, 🎮 *Игровой*, 🔒 *Приватность*, 🧹 *Очистка*.
+            - **🤖 Специальные твики для Windows 11 25H2**:
+              - Отключение **Windows Recall** (снимки экрана AI и семантическая индексация).
+              - Отключение **Windows Copilot** и кнопки Copilot.
+              - Отключение веб-поиска Bing в меню Пуск.
+              - Отключение Windows Spotlight, рекламного ID и промо-подсказок.
+            - **⚡ Игровая производительность**:
+              - Включение **HAGS** (аппаратное планирование GPU).
+              - Отключение **Network Throttling** для минимального пинга.
+              - Отключение **VBS и HVCI**.
+            - **🔒 Безупречные кодировки**:
+              - Полная поддержка UTF-8 с BOM, идеальное отображение в Windows 10/11 без искажений.
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
